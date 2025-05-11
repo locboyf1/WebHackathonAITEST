@@ -1,0 +1,19 @@
+﻿@{
+    ViewData["Title"] = "Upload Văn Bản";
+}
+
+<h2>Upload Tài Liệu</h2>
+
+<form asp-action="UploadText" method="post">
+    <div>
+        <label for="documentText">Nhập nội dung tài liệu:</label><br />
+        <textarea name="documentText" rows="10" cols="80"></textarea>
+    </div>
+    <br />
+    <button type="submit">Tải lên và xử lý</button>
+</form>
+
+@if (ViewBag.Message != null)
+{
+    <p style="color: green">@ViewBag.Message</p>
+}
