@@ -1,10 +1,9 @@
-﻿
-public class DocumentEmbeddingService
+﻿public class DocumentEmbeddingService
 {
-    private readonly EmbeddingService _embeddingService;
+    private readonly CohereEmbeddingService _embeddingService;
     private readonly DocumentChunkService _chunkService;
 
-    public DocumentEmbeddingService(EmbeddingService embeddingService, DocumentChunkService chunkService)
+    public DocumentEmbeddingService(CohereEmbeddingService embeddingService, DocumentChunkService chunkService)
     {
         _embeddingService = embeddingService;
         _chunkService = chunkService;

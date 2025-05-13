@@ -14,7 +14,7 @@ builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
 builder.Services.AddScoped<DocumentEmbeddingService>();
 builder.Services.AddScoped<DocumentChunkService>();
-builder.Services.AddScoped<EmbeddingService>();
+builder.Services.AddScoped<CohereEmbeddingService>();
 
 
 var app = builder.Build();

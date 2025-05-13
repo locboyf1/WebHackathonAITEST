@@ -1,0 +1,21 @@
+﻿@{
+    ViewData["Title"] = "Chatbot";
+}
+
+<h2>Hỏi tài liệu</h2>
+
+<form asp-action="Index" method="post">
+    <div class="form-group">
+        <label for="userQuestion">Nhập câu hỏi:</label>
+        <input type="text" class="form-control" id="userQuestion" name="userQuestion" required />
+    </div>
+    <button type="submit" class="btn btn-primary mt-2">Gửi</button>
+</form>
+
+@if (ViewBag.Answer != null)
+{
+    <div class="alert alert-info mt-3">
+        <strong>Trả lời:</strong>
+        <p>@ViewBag.Answer</p>
+    </div>
+}
