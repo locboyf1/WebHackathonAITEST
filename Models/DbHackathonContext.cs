@@ -33,6 +33,8 @@ public partial class DbHackathonContext : DbContext
 
     public virtual DbSet<TbContact> TbContacts { get; set; }
 
+    public virtual DbSet<TbDownloaded> TbDownloadeds { get; set; }
+
     public virtual DbSet<TbMenu> TbMenus { get; set; }
 
     public virtual DbSet<TbPublisher> TbPublishers { get; set; }
@@ -194,6 +196,26 @@ public partial class DbHackathonContext : DbContext
                 .IsUnicode(false);
             entity.Property(e => e.Name).HasMaxLength(80);
             entity.Property(e => e.Title).HasMaxLength(100);
+        });
+
+        modelBuilder.Entity<TbDownloaded>(entity =>
+        {
+            entity.HasKey(e => e.DownloadedId);
+
+            entity.ToTable("TB_Downloaded");
+
+            entity.Property(e => e.DownloadedId).HasColumnName("DownloadedID");
+            entity.Property(e => e.BookId).HasColumnName("BookID");
+            entity.Property(e => e.Time).HasColumnType("datetime");
+            entity.Property(e => e.UserId).HasColumnName("UserID");
+
+            entity.HasOne(d => d.Book).WithMany(p => p.TbDownloadeds)
+                .HasForeignKey(d => d.BookId)
+                .HasConstraintName("FK_TB_Downloaded_TB_Book");
+
+            entity.HasOne(d => d.User).WithMany(p => p.TbDownloadeds)
+                .HasForeignKey(d => d.UserId)
+                .HasConstraintName("FK_TB_Downloaded_TB_User");
         });
 
         modelBuilder.Entity<TbMenu>(entity =>

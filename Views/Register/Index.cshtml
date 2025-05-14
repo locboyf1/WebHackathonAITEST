@@ -1,0 +1,160 @@
+﻿@model TbUser
+<!-- Start: Page Banner -->
+<section class="inner-page-banner">
+    <div class="container">
+        <div class="banner-header">
+            <h2>Signup</h2>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb justify-content-center">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Signup</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</section>
+<!-- End: Page Banner -->
+<!-- Start: Cart Section -->
+<div id="content" class="site-content">
+    <div id="primary" class="content-area">
+        <main id="main" class="site-main">
+            <div class="signin-main">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <img class="rounded" src="/assets/images/section-images/signin-pages-image.png" alt="">
+                        </div>
+                        <div class="col-md-7">
+                            <div class="signin-up-form">
+                                <h6 class="sub-heading-v2">Join Skille</h6>
+                                <h2 class="heading-v2">Create A New Account To Access Library and Online Learning Management System</h2>
+                                <em class="lead-text">
+                                    Sed nec fermentum leo. Vestibulum pulvinar, risus quis mollis
+                                    posuere, lorem lectus pretium turpis, non elementum eros metus ut purus. Morbi
+                                    hendrerit molestie augue luctus euismod.
+                                </em>
+                                @* <div class="login-option-btn"> *@
+                                @*     <a href="#" class="facebook"> *@
+                                @*         <i class="fa fa-facebook-f"></i> <span> *@
+                                @*             Login With *@
+                                @*             Facebook *@
+                                @*         </span> *@
+                                @*     </a> *@
+                                @*     <a href="#" class="twitter"><i class="fa fa-twitter"></i> <span>Login With Twitter</span></a> *@
+                                @*     <a href="#" class="google-plus"> *@
+                                @*         <i class="fa fa-google-plus"></i> <span> *@
+                                @*             Login With *@
+                                @*             Google *@
+                                @*         </span> *@
+                                @*     </a> *@
+                                @* </div> *@
+                                <form asp-action="Register" method="post" id="Register">
+                                    <div class="form-group">
+                                        <label for="name">Name</label>
+                                        <input asp-for="Name" type="text" class="form-control" id="name" placeholder="Your Name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputEmail4">Email Address</label>
+                                        <input asp-for="Email" type="email" class="form-control" id="email" placeholder="Email Address">
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="inputPassword3">Password</label>
+                                            <input asp-for="Password" type="password" class="form-control" id="password" placeholder="Password">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="inputPassword4">Confirm Password</label>
+                                            <input type="password" class="form-control" id="confirmpassword" placeholder="Confirm Password">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="term">
+                                            <label class="form-check-label" for="term">
+                                                By registering your
+                                                details you are agree to our Terms and Condition
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-secondary">Create Account</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+<!-- End: Cart Section -->
+<!-- Start: Testimonial Section -->
+<section class="testimonial-main-v3">
+    <div class="container">
+        <div class="testimonial-social-main" style="background-image: none;">
+            <div class="row">
+                <div class="col-md-10 mx-auto text-center">
+                    <h6 class="sub-heading-v2">Newsletter</h6>
+                    <h2 class="heading-v2">Subscribe Our Newsletter</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-10 mx-auto">
+                    <div class="form-group newsletter-inner">
+                        <input class="form-control" placeholder="Enter your Email!" id="newsletter" name="newsletter" type="email">
+                        <input class="btn btn-primary" value="Subscribe" type="submit">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="social-icons-v3">
+            <ul>
+                <li>
+                    <a class="facebook" href="#" target="_blank">
+                        <span><i class="fa fa-facebook-f"></i> <small>Facebook</small></span>
+                    </a>
+                </li>
+                <li>
+                    <a class="twitter" href="#" target="_blank">
+                        <span><i class="fa fa-twitter"></i> <small>Twitter</small></span>
+                    </a>
+                </li>
+                <li>
+                    <a class="rss" href="#" target="_blank">
+                        <span><i class="fa fa-rss"></i> <small>Rss Feed</small></span>
+                    </a>
+                </li>
+                <li>
+                    <a class="linkedin" href="#" target="_blank">
+                        <span><i class="fa fa-linkedin"></i> <small>Linkedin</small></span>
+                    </a>
+                </li>
+                <li>
+                    <a class="youtube" href="#" target="_blank">
+                        <span><i class="fa fa-youtube"></i> <small>Youtube</small></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+<!-- End: Testimonial Section -->
+@section Scripts {
+    <script>
+        document.getElementById('Register').addEventListener('submit', function(e) {
+            var password = document.getElementById('password').value;
+            var confirm = document.getElementById('confirmpassword').value;
+            var agree = document.getElementById('term').checked;
+
+            if (password !== confirm) {
+                alert('Password and confirm password do not match!');
+                e.preventDefault();
+                return false;
+            }
+            if (!agree) {
+                alert('You must agree to the terms before registering.!');
+                e.preventDefault();
+                return false;
+            }
+        });
+    </script>
+}

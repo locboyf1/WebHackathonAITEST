@@ -29,12 +29,21 @@
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-                            <script src="/assets/js/html5shiv.min.js"></script>
-                            <script src="/assets/js/respond.min.js"></script>
-                            <![endif]-->
+    <script src="/assets/js/html5shiv.min.js"></script>
+    <script src="/assets/js/respond.min.js"></script>
+    <![endif]-->
 </head>
 
 <body>
+    @using WebHackathon.Utilities;
+    @if (!string.IsNullOrEmpty(Function._message))
+    {
+        <script>
+            alert('@Function._message');
+        </script>
+
+        Function._message = string.Empty;
+    }
 
     <!-- Start: Header Section -->
     <header id="header" class="inner-navbar-wrapper navbar-wrapper">
@@ -60,20 +69,36 @@
                         <li class="nav-item dropdown">
                             <a data-toggle="dropdown" aria-expanded="false" class="nav-link dropdown-toggle active" href="books-media-list-view.html">Books &amp; Media</a>
                             <ul class="dropdown-menu">
-                                <li><a href="books-media-list-view.html">Books &amp; Media List
-                                        View</a>
+                                <li>
+                                    <a href="books-media-list-view.html">
+                                        Books &amp; Media List
+                                        View
+                                    </a>
                                 </li>
-                                <li><a href="books-media-gird-view.html">Books &amp; Media Grid
-                                        View</a></li>
+                                <li>
+                                    <a href="books-media-gird-view.html">
+                                        Books &amp; Media Grid
+                                        View
+                                    </a>
+                                </li>
                                 <li><a href="books-media-v3.html">Books &amp; Media V3</a></li>
-                                <li><a href="books-media-detail-v1.html">Books &amp; Media
-                                        Detail V1</a>
+                                <li>
+                                    <a href="books-media-detail-v1.html">
+                                        Books &amp; Media
+                                        Detail V1
+                                    </a>
                                 </li>
-                                <li><a href="books-media-detail-v2.html">Books &amp; Media
-                                        Detail V2</a>
+                                <li>
+                                    <a href="books-media-detail-v2.html">
+                                        Books &amp; Media
+                                        Detail V2
+                                    </a>
                                 </li>
-                                <li><a href="books-media-detail-v3.html">Books &amp; Media
-                                        Detail V3</a>
+                                <li>
+                                    <a href="books-media-detail-v3.html">
+                                        Books &amp; Media
+                                        Detail V3
+                                    </a>
                                 </li>
                             </ul>
                         </li>
@@ -82,11 +107,18 @@
                                 News &amp; Events
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="news-events-list-view.html">News &amp; Events List
-                                        View</a>
+                                <li>
+                                    <a href="news-events-list-view.html">
+                                        News &amp; Events List
+                                        View
+                                    </a>
                                 </li>
-                                <li><a href="news-events-detail.html">News &amp; Events
-                                        Detail</a></li>
+                                <li>
+                                    <a href="news-events-detail.html">
+                                        News &amp; Events
+                                        Detail
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
@@ -116,10 +148,14 @@
                         <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a>
                     </ul>
                     <div class="header-login-btn">
-                        <a href="signin.html" class="btn btn-light"><i class="fa fa-user"></i>
-                            Login</a>
-                        <a href="cart.html" class="btn btn-light"><i class="fa fa-cart-plus"></i>
-                            Cart</a>
+                        <a href="signin.html" class="btn btn-light">
+                            <i class="fa fa-user"></i>
+                            Login
+                        </a>
+                        <a href="cart.html" class="btn btn-light">
+                            <i class="fa fa-cart-plus"></i>
+                            Cart
+                        </a>
                     </div>
                 </div>
             </nav>
@@ -144,27 +180,44 @@
                         <li>
                             <a href="books-media-list-view.html">Books &amp; Media</a>
                             <ul>
-                                <li><a href="books-media-list-view.html">Books &amp; Media List
-                                        View</a>
+                                <li>
+                                    <a href="books-media-list-view.html">
+                                        Books &amp; Media List
+                                        View
+                                    </a>
                                 </li>
-                                <li><a href="books-media-gird-view.html">Books &amp; Media Grid
-                                        View</a></li>
+                                <li>
+                                    <a href="books-media-gird-view.html">
+                                        Books &amp; Media Grid
+                                        View
+                                    </a>
+                                </li>
                                 <li><a href="books-media-v3.html">Books &amp; Media V3</a></li>
-                                <li><a href="books-media-detail-v1.html">Books &amp; Media
-                                        Detail V1</a>
+                                <li>
+                                    <a href="books-media-detail-v1.html">
+                                        Books &amp; Media
+                                        Detail V1
+                                    </a>
                                 </li>
-                                <li><a href="books-media-detail-v2.html">Books &amp; Media
-                                        Detail V2</a>
+                                <li>
+                                    <a href="books-media-detail-v2.html">
+                                        Books &amp; Media
+                                        Detail V2
+                                    </a>
                                 </li>
-                                <li><a href="books-media-detail-v3.html">Books &amp; Media
-                                        Detail V3</a>
+                                <li>
+                                    <a href="books-media-detail-v3.html">
+                                        Books &amp; Media
+                                        Detail V3
+                                    </a>
                                 </li>
                             </ul>
                         </li>
                         <li>
                             <a href="news-events-list-view.html">News &amp; Events</a>
                             <ul>
-                                <li><a href="news-events-list-view.html">News &amp; Events List View</a>
+                                <li>
+                                    <a href="news-events-list-view.html">News &amp; Events List View</a>
                                 </li>
                                 <li><a href="news-events-detail.html">News &amp; Events Detail</a></li>
                             </ul>
@@ -197,7 +250,6 @@
         </div>
     </header>
     <!-- End: Header Section -->
-
     @RenderBody()
 
     <!-- Start: Footer -->
@@ -209,8 +261,8 @@
                         <div id="text-2" class="widget widget_text">
                             <div class="about-us">
                                 <a href="index-2.html">
-                                <img src="/assets/images/logo-footer-v1.png" alt="skille" />
-                            </a>
+                                    <img src="/assets/images/logo-footer-v1.png" alt="skille" />
+                                </a>
                             </div>
                             <div class="textwidget">
                                 The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum
@@ -253,19 +305,19 @@
                         <div class="widget twitter-widget">
                             <h3 class="footer-widget-title">Contact Info</h3>
                             <address>
-                            <div class="info">
-                                <i class="fa fa-location-arrow"></i>
-                                <span>21 King Street, Melbourne, Victoria 3000 Australia</span>
-                            </div>
-                            <div class="info">
-                                <i class="fa fa-envelope"></i>
-                                <span><a href="mailto:support@skille.com">support@skille.com</a></span>
-                            </div>
-                            <div class="info">
-                                <i class="fa fa-phone"></i>
-                                <span><a href="tel:012-345-6789">+ 012-345-6789</a></span>
-                            </div>
-                        </address>
+                                <div class="info">
+                                    <i class="fa fa-location-arrow"></i>
+                                    <span>21 King Street, Melbourne, Victoria 3000 Australia</span>
+                                </div>
+                                <div class="info">
+                                    <i class="fa fa-envelope"></i>
+                                    <span><a href="mailto:support@skille.com">support@skille.com</a></span>
+                                </div>
+                                <div class="info">
+                                    <i class="fa fa-phone"></i>
+                                    <span><a href="tel:012-345-6789">+ 012-345-6789</a></span>
+                                </div>
+                            </address>
                         </div>
                     </div>
                 </div>
@@ -295,7 +347,6 @@
         <button id="myBtn" title="Go to top"><span>&#8593;</span></button>
     </footer>
     <!-- End: Footer -->
-
     <!-- jQuery Latest Version 1.x -->
     <script src="../code.jquery.com/jquery-2.2.3.min.js"></script>
 
@@ -348,6 +399,8 @@
 
     <!-- Custom Scripts -->
     <script src="/assets/js/main.js"></script>
+
+    @RenderSection("Scripts", required: false)
 
 </body>
 

@@ -31,6 +31,8 @@ public partial class TbBook
 
     public virtual ICollection<TbCart> TbCarts { get; set; } = new List<TbCart>();
 
+    public virtual ICollection<TbDownloaded> TbDownloadeds { get; set; } = new List<TbDownloaded>();
+
     public virtual ICollection<TbReview> TbReviews { get; set; } = new List<TbReview>();
 
     public virtual ICollection<TbSavedBook> TbSavedBooks { get; set; } = new List<TbSavedBook>();
