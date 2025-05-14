@@ -7,7 +7,7 @@ public partial class TbMenu
 {
     public int MenuId { get; set; }
 
-    public int? Title { get; set; }
+    public string? Title { get; set; }
 
     public string? Alias { get; set; }
 
