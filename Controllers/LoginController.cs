@@ -40,10 +40,27 @@ namespace WebHackathon.Controllers
             Function._username = check.Name;
             Function._userid = check.UserId;
             Function._useravatar = check.Avatar;
-            
+            Function._userrole = check.RoleId;
+
+            if(string.IsNullOrEmpty(Function._returnUrl)){
+                return RedirectToAction("Index", "Home");
+            }
+
+            string link = Function._returnUrl;
+            Function._returnUrl = string.Empty;
+
+            return Redirect(link);
+        }
+
+        public IActionResult Logout()
+        {
+            Function._useremail = string.Empty;
+            Function._username = string.Empty;
+            Function._userid = 0;
+            Function._userrole = 0;
+            Function._useravatar = string.Empty;
+            Function._message = "Đăng xuất thành công";
             return RedirectToAction("Index", "Home");
-
-
         }
     }
 }

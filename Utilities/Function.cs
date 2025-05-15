@@ -1,4 +1,6 @@
-﻿using System.Security.Cryptography;
+﻿using Humanizer;
+using Microsoft.AspNetCore.Mvc;
+using System.Security.Cryptography;
 namespace WebHackathon.Utilities
 {
     public class Function
@@ -6,13 +8,16 @@ namespace WebHackathon.Utilities
         public static string _useremail = string.Empty;
         public static string _username = string.Empty;
         public static int _userid = 0;
+        public static int? _userrole = 0;
         public static string _useravatar = string.Empty;
 
         public static string _message = string.Empty;
 
+        public static string _returnUrl = string.Empty;
+
         public static bool IsLogin()
         {
-            if(string.IsNullOrEmpty(_useremail) || string.IsNullOrEmpty(_useravatar) || string.IsNullOrEmpty(_username) || _userid == 0)
+            if(string.IsNullOrEmpty(_useremail) || string.IsNullOrEmpty(_useravatar) || string.IsNullOrEmpty(_username) || _userid == 0 || _userrole == 0)
             {
                 return false;
             }
