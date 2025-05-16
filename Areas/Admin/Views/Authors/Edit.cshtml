@@ -1,0 +1,86 @@
+﻿@model WebHackathon.Models.TbAuthor
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<!-- App body starts -->
+<div class="app-body">
+
+    <!-- Row starts -->
+    <div class="row gx-3">
+        <div class="col-sm-12">
+            <div class="card mb-3">
+                <form asp-action="Edit" method="post" enctype="multipart/form-data">
+                    <input  type="hidden" asp-for="AuthorId" />
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Image" />
+                    <div class="card-header">
+                        <h5 class="card-title">Edit author: @Model.Name</h5>
+                    </div>
+                    <div class="card-body">
+                        <!-- Row starts -->
+                        <div class="row gx-3">
+                            <div class="col-lg-8 col-sm-12 col-6">
+                                <div class="mb-3">
+                                    <label for="formFile" class="form-label">Image</label>
+                                    <input class="form-control" name="img" type="file" id="formFile" accept="image/*" onchange="previewImage(event)">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <img src="@Model.Image" class="img-6x rounded-circle" id="imagePreview" style=" margin: auto" />
+                            </div>
+
+                        </div>
+                        <!-- Row ends -->
+
+                        <div class="col-sm-8 col-12">
+                            <div class="col-lg-3 col-sm-4 col-12">
+                                <div class="mb-3">
+                                    <label class="form-label" for="a1">Name</label>
+                                    <input type="text" asp-for="Name" class="form-control" id="a1" placeholder="Enter fullname" required>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label" for="a9">Description</label>
+                                <textarea class="form-control" id="a9" asp-for="Description" placeholder="Enter description" rows="3" required></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="d-flex gap-2 justify-content-end">
+                            <a asp-action="Index" class="btn btn-outline-secondary"> Cancel  </a>
+                            <button type="submit" class="btn btn-primary">  Save </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Row ends -->
+
+</div>
+<!-- App body ends -->
+@section Scripts {
+
+    <script>
+        function previewImage(event) {
+            const input = event.target;
+            const preview = document.getElementById('imagePreview');
+
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    preview.src = e.target.result;
+                    preview.style.display = "block";
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+
+}

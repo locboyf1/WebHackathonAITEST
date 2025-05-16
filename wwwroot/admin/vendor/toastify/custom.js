@@ -1,6 +1,6 @@
 
 Toastify({
-  text: "Welcome to Lead Admin",
+  text: "Welcome to back",
   duration: 3000,
   close: true,
   avatar: 'assets/images/user3.png',

@@ -1,0 +1,43 @@
+﻿@model WebHackathon.Models.TbAuthor
+
+@{
+    ViewData["Title"] = $"Information of author: {Model.Name}";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<!-- App body starts -->
+<div class="app-body">
+
+    <!-- Row start -->
+    <div class="row gx-3">
+
+        <div class=" col-12">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="d-flex align-items-center flex-column">
+                        <div class="mb-3">
+                            <img src="@Model.Image" class="img-6x rounded-circle" alt="Avatar">
+                        </div>
+                        <h5 class="mb-2">@Model.Name</h5>
+
+                        <div class="mt-3">
+                            <p>@Html.Raw(Model.Description)</p>
+                        </div>
+                        <div class="mt-3">
+                            <a class="btn btn-outline-secondary" style="margin-right: 100px" asp-action="Index">Back the list</a>
+                            <a class="btn btn-success" style="margin-right: 100px" asp-action="Edit" asp-route-id="@Model.AuthorId">Edit</a>
+                            <a class="btn btn-primary" asp-action="Index" asp-controller="Books" asp-route-id="@Model.AuthorId">Open book list</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <!-- Row end -->
+
+</div>
+<!-- App body ends -->

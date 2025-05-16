@@ -19,8 +19,21 @@ namespace WebHackathon.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-           
-            return Redirect(Function.CheckAdmin(Url.Action("Index")));
+
+            if (!Function.IsLogin())
+            {
+                Function._message = "Please login to confirm";
+                Function._returnUrl = "/admin";
+                return Redirect("/login");
+            }
+
+            if (Function._userrole == 1)
+            {
+                Function._message = "You can't visit this site";
+                return Redirect("/home");
+            }
+
+            return View();
         }
 
 
