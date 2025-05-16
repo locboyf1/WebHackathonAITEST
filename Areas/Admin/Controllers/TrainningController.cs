@@ -29,13 +29,13 @@ namespace WebHackathon.Areas.Admin.Controllers
         {
             if (string.IsNullOrWhiteSpace(documentText))
             {
-                ViewBag.Message = "Vui lòng nhập nội dung tài liệu.";
+                ViewBag.Message = "Please input the context.";
                 return View("Index");
             }
 
             await _embeddingService.LoadAndSaveFromTextAsync(documentText);
 
-            ViewBag.Message = "Đã xử lý và lưu thành công embedding từ văn bản!";
+            ViewBag.Message = "Succes process the content and save it!";
             return View("Index");
         }
 
@@ -44,7 +44,7 @@ namespace WebHackathon.Areas.Admin.Controllers
         {
             if (pdfFile == null || pdfFile.Length == 0)
             {
-                ViewBag.Message = "Vui lòng chọn tệp PDF hợp lệ.";
+                ViewBag.Message = "please choose a valid pdf file .";
                 return View("Index");
             }
 
@@ -54,7 +54,7 @@ namespace WebHackathon.Areas.Admin.Controllers
 
             await _embeddingService.LoadAndSaveFromTextAsync(allText);
 
-            ViewBag.Message = "Tải lên và xử lý PDF thành công.";
+            ViewBag.Message = "Success upload and process the pdf file.";
             return View("Index");
         }
 

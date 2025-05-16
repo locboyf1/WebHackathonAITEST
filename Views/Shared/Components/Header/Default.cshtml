@@ -1,4 +1,5 @@
 ﻿@model List<TbMenu>
+@using WebHackathon.Utilities;
 @{
     var menu1 = Model.Where(i => i.ParentId == 0).ToList();
     var menu2 = Model.Where(i => i.ParentId != 0).ToList();
@@ -53,17 +54,18 @@
         </ul>
 
         <div class="header-login-btn">
-            <a href="signin.html" class="btn btn-light">
-                <i class="fa fa-user"></i>
-                Login
-            </a>
-            <a href="cart.html" class="btn btn-light">
-                <i class="fa fa-cart-plus"></i>
-                Cart
-            </a>
+            @if (!Function.IsLogin())
+            {
+                <a href="/login" class="btn btn-light"> <i class="fa fa-user"></i> Login </a>
+            }
+            else
+            {
+                <a href="cart.html" class="btn btn-light"> <i class="fa fa-cart-plus"></i> Cart </a>
+            }
         </div>
     </div>
 </nav>
+
 <!-- Header Main Navigation End-->
 <!-- Mobile Navigation-->
 <div class="mobile-menu d-lg-none">

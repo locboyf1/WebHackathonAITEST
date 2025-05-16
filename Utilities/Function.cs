@@ -15,9 +15,27 @@ namespace WebHackathon.Utilities
 
         public static string _returnUrl = string.Empty;
 
+        public static string CheckAdmin(string url)
+        {
+            if (!Function.IsLogin())
+            {
+                Function._message = "Please login to confirm";
+                Function._returnUrl = "/admin";
+                return "/login";
+            }
+
+            if (Function._userrole == 1)
+            {
+                Function._message = "You can't visit this site";
+                return "/home";
+            }
+
+            return url;
+        }
+
         public static bool IsLogin()
         {
-            if(string.IsNullOrEmpty(_useremail) || string.IsNullOrEmpty(_useravatar) || string.IsNullOrEmpty(_username) || _userid == 0 || _userrole == 0)
+            if (string.IsNullOrEmpty(_useremail) || string.IsNullOrEmpty(_useravatar) || string.IsNullOrEmpty(_username) || _userid == 0 || _userrole == 0)
             {
                 return false;
             }
