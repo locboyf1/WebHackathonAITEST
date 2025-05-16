@@ -1,0 +1,55 @@
+﻿@model WebHackathon.Models.TbPublisher
+
+@{
+    ViewData["Title"] = $"Edit the publisher: {Model.Name}";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<!-- App body starts -->
+<div class="app-body">
+
+    <!-- Row starts -->
+    <div class="row gx-3">
+        <div class="col-sm-12">
+            <div class="card mb-3">
+                <form asp-action="Edit" method="post">
+
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="PublisherId" />
+                    <div class="card-header">
+                        <h5 class="card-title">Edit the publisher : @Model.Name</h5>
+                    </div>
+                    <div class="card-body">
+
+                        <div class="col-sm-12 col-12">
+                            <div class="col-lg-3 col-sm-4 col-12">
+                                <div class="mb-3">
+                                    <label class="form-label" for="a1">Name</label>
+                                    <input type="text" asp-for="Name" class="form-control" id="a1" placeholder="Enter name" required>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label" for="a9">Description</label>
+                                <textarea class="form-control" id="a9" asp-for="Description" placeholder="Enter description" rows="3" required></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="d-flex gap-2 justify-content-end">
+                            <a asp-action="Index" class="btn btn-outline-secondary"> Cancel  </a>
+                            <button type="submit" class="btn btn-primary">  Save </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Row ends -->
+
+</div>
+<!-- App body ends -->
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

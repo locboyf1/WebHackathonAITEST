@@ -26,7 +26,7 @@ namespace WebHackathon.Areas.Admin.Controllers
         // GET: Admin/Authors
         public async Task<IActionResult> Index(int page = 1)
         {
-            const int pageSize = 9;
+            const int pageSize = 6;
             if (!Function.IsLogin())
             {
                 Function._message = "Please login to confirm";
@@ -44,7 +44,7 @@ namespace WebHackathon.Areas.Admin.Controllers
 
             ViewBag.page_num = (int)Math.Ceiling((double)_context.TbAuthors.Count() / pageSize);
 
-            var authorlist = await _context.TbAuthors.Skip((page - 1) * 10).Take(pageSize).ToListAsync();
+            var authorlist = await _context.TbAuthors.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
 
             return View(authorlist);
         }
@@ -55,6 +55,19 @@ namespace WebHackathon.Areas.Admin.Controllers
             if (id == null)
             {
                 return NotFound();
+            }
+
+            if (!Function.IsLogin())
+            {
+                Function._message = "Please login to confirm";
+                Function._returnUrl = $"/admin/authors/details/{id}";
+                return Redirect("/login");
+            }
+
+            if (Function._userrole == 1)
+            {
+                Function._message = "You can't visit this site";
+                return Redirect("/home");
             }
 
             var tbAuthor = await _context.TbAuthors
@@ -127,7 +140,7 @@ namespace WebHackathon.Areas.Admin.Controllers
             if (!Function.IsLogin())
             {
                 Function._message = "Please login to confirm";
-                Function._returnUrl = "/admin/authors";
+                Function._returnUrl = $"/admin/authors/edit/{id}";
                 return Redirect("/login");
             }
 

@@ -49,7 +49,7 @@
                 @for (int i = 1; i <= ViewBag.page_num; i++)
                 {
                     <li class="page-item @(ViewBag.page == i ? "active" : "")">
-                        <a class="page-link" href="#">1</a>
+                        <a class="page-link" asp-action="Index" asp-route-page="@i">@i</a>
                     </li>
                 }
 
