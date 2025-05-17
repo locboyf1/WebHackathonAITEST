@@ -1,0 +1,84 @@
+@using WebHackathon.Models;
+@using WebHackathon.Utilities;
+@model IEnumerable<WebHackathon.ViewComponents.BookInfoDto>
+
+<div id="category-filter-v2">
+    <ul class="category-list">
+        @foreach (var book in Model)
+        {
+            <li class="category-item kids-teens flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <img src="/assets/images/category-filter/home-v2/category-filter-img-08.jpg" alt="@book.Title" />
+                        <div class="info-block">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="rating">
+                                        <span>☆</span>
+                                        <span>☆</span>
+                                        <span>☆</span>
+                                        <span>☆</span>
+                                        <span>☆</span>
+                                    </div>
+                                    <div class="category-tags bg-yellow">@book.CategoryName ?? ""</div>
+                                </div>
+                            </div>
+                            <h4>@book.Title</h4>
+                            <span class="author"><strong>Author:</strong> @book.AuthorName ?? ""</span><br />
+                        </div>
+                    </div>
+                    <div class="flip-card-back">
+                        <div class="info-block">
+                            <ol>
+                                <li>
+                                    <a href="wishlist.html" data-toggle="blog-tags" data-placement="top" title="Add To List">
+                                        <i class="fa fa-heart"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="cart.html" data-toggle="blog-tags" data-placement="top" title="Add To Cart">
+                                        <i class="fa fa-shopping-cart"></i> Add to Cart
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" data-toggle="blog-tags" data-placement="top" title="View Image">
+                                        <i class="fa fa-search"></i>
+                                    </a>
+                                </li>
+                            </ol>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="rating-box">
+                                        <div class="category-tags bg-yellow">@book.CategoryName ?? ""</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <h4>@book.Title</h4>
+                            <span class="author"><strong>Author:</strong> @book.AuthorName ?? ""</span><br />
+                            <p>@book.Description ?? ""</p>
+                            <a href="books-media-detail-v2.html" class="btn btn-light">Read More</a>
+                            <ol class="bottom-sticky">
+                                <li>
+                                    <a href="#" data-toggle="blog-tags" data-placement="top" title="Minutes">
+                                        <i class="fa fa-clock-o"></i> 35 Min
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" data-toggle="blog-tags" data-placement="top" title="Group">
+                                        <i class="fa fa-users"></i> 168
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" data-toggle="blog-tags" data-placement="top" title="Share This">
+                                        <i class="fa fa-share-alt"></i> Share
+                                    </a>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        }
+    </ul>
+    <a href="books-media-gird-view.html" class="btn btn-secondary mt-3">View All Collections</a>
+</div>

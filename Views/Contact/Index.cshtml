@@ -1,0 +1,159 @@
+﻿@model TbContact;
+@{
+    ViewBag.Active = "contact";
+}
+<div class="google-map">
+    <div id="map"></div>
+</div>
+<div class="about-company-detail">
+    <div class="container">
+        <ul>
+            <li>
+                <img src="images/icons/location-icon.png" alt="">
+                <h6>Our Location</h6>
+                <ol>
+                    <li>121 King Street, Melbourne </li>
+                    <li>Victoria 3000 Australia</li>
+                    <li>PO Box 16122</li>
+                </ol>
+            </li>
+            <li>
+                <img src="images/icons/phone-icon.png" alt="">
+                <h6>Phone and Fax</h6>
+                <ol>
+                    <li><a href="tel:+123-456-7890"><em>Mobile:</em> +123-456-7890</a></li>
+                    <li><a href="tel:+123-456-7890"><em>Phone:</em> +12-3456-6789</a></li>
+                    <li><a href="fax:(001)-254-7359"><em>Fax:</em> (001)-254-7359</a></li>
+                </ol>
+            </li>
+            <li>
+                <img src="images/icons/email-website-icon.png" alt="">
+                <h6>Email Address</h6>
+                <ol>
+                    <li><a href="http://www.libraria.com/">www.libraria.com </a></li>
+                    <li><a href="mailto:support@libraria.com">support@libraria.com</a></li>
+                    <li><a href="mailto:info@libraria.com">info@libraria.com</a></li>
+                </ol>
+            </li>
+            <li>
+                <img src="images/icons/timming-icon.png" alt="" />
+                <h6>Our Timings</h6>
+                <p>Mon - Thu: 9:00 am - 7:00 pm</p>
+                <p>Sat - Sun: 11:00 am - 5:00 pm</p>
+                <div class="branches">
+                    <a href="#">Closings</a>
+                    <a href="#">Branches</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- Start: Contact Us Section -->
+<div id="content" class="site-content">
+    <div id="primary" class="content-area">
+        <main id="main" class="site-main">
+            <div class="contact-main">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h6 class="sub-heading-v2">Get In Touch</h6>
+                            <h2 class="heading-v2">Send Us A Message</h2>
+                            <p class="lead-text">Sed nec fermentum leo. Vestibulum pulvinar, risus quis mollis posuere, lorem lectus pretium turpis, non elementum eros metus ut purus. Morbi hendrerit molestie augue luctus euismod. </p>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="contact-form">
+                                <form id="contact" name="contact" asp-action="Index" method="post">
+                                    <div class="row">
+
+                                        <div class="col-md-6 col-sm-6">
+                                            <div class="form-group">
+                                                <input class="form-control" type="text" placeholder="Name" asp-for="Name" id="name" size="30" value="" aria-required="true" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-6">
+                                            <div class="form-group">
+                                                <input class="form-control" type="email" asp-for="Email" placeholder="Email" id="email" size="30" value="" aria-required="true" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12 col-sm-12">
+                                        <div class="form-group">
+                                            <input class="form-control" asp-for="Title" type="text" placeholder="Subject" id="phone" size="30" value="" aria-required="true" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <textarea class="form-control" asp-for="Detail" placeholder="Write Your Message ..." id="message" aria-required="true"></textarea>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-12">
+                                        <div class="form-group form-submit">
+                                            <input class="btn btn-secondary" id="submit-contact-form" type="submit" name="submit" value="Send Message" />
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+</div>
+<!-- End: Contact Us Section -->
+<!-- Start: Testimonial Section -->
+<section class="testimonial-main-v3">
+    <div class="container">
+        <div class="testimonial-social-main" style="background-image: none;">
+            <div class="row">
+                <div class="col-md-10 mx-auto text-center">
+                    <h6 class="sub-heading-v2">Newsletter</h6>
+                    <h2 class="heading-v2">Subscribe Our Newsletter</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-10 mx-auto">
+                    <div class="form-group newsletter-inner">
+                        <input class="form-control" placeholder="Enter your Email!" id="newsletter" name="newsletter" type="email">
+                        <input class="btn btn-primary" value="Subscribe" type="submit">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="social-icons-v3">
+            <ul>
+                <li>
+                    <a class="facebook" href="#" target="_blank">
+                        <span><i class="fa fa-facebook-f"></i> <small>Facebook</small></span>
+                    </a>
+                </li>
+                <li>
+                    <a class="twitter" href="#" target="_blank">
+                        <span><i class="fa fa-twitter"></i> <small>Twitter</small></span>
+                    </a>
+                </li>
+                <li>
+                    <a class="rss" href="#" target="_blank">
+                        <span><i class="fa fa-rss"></i> <small>Rss Feed</small></span>
+                    </a>
+                </li>
+                <li>
+                    <a class="linkedin" href="#" target="_blank">
+                        <span><i class="fa fa-linkedin"></i> <small>Linkedin</small></span>
+                    </a>
+                </li>
+                <li>
+                    <a class="youtube" href="#" target="_blank">
+                        <span><i class="fa fa-youtube"></i> <small>Youtube</small></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+<!-- End: Testimonial Section -->
