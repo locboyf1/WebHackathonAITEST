@@ -1,33 +1,32 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using UglyToad.PdfPig.Content;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using WebHackathon.Models;
 using WebHackathon.Utilities;
 
 namespace WebHackathon.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class BlogCategoriesController : Controller
+    public class CategoriesController : Controller
     {
         private readonly DbHackathonContext _context;
 
-        public BlogCategoriesController(DbHackathonContext context)
+        public CategoriesController(DbHackathonContext context)
         {
             _context = context;
         }
 
-        // GET: Admin/BlogCategories
-        public async Task<IActionResult> Index(int page = 1)
+        // GET: Admin/Categories
+        public async Task<IActionResult> Index()
         {
             if (!Function.IsLogin())
             {
                 Function._message = "Please login to confirm";
-                Function._returnUrl = "/admin/BLogcategories";
+                Function._returnUrl = $"/admin/categories";
                 return Redirect("/login");
             }
 
@@ -36,26 +35,16 @@ namespace WebHackathon.Areas.Admin.Controllers
                 Function._message = "You can't visit this site";
                 return Redirect("/home");
             }
-
-            const int pageSize = 10;
-
-            ViewBag.page = page;
-
-            ViewBag.page_num = (int)Math.Ceiling((double)_context.TbAuthors.Count() / pageSize);
-
-            var category = _context.TbBlogCategories.Skip((page - 1) * pageSize).Take(pageSize).ToList();
-
-            return View(category);
+            return View(await _context.TbCategories.ToListAsync());
         }
 
-
-        // GET: Admin/BlogCategories/Create
+        // GET: Admin/Categories/Create
         public IActionResult Create()
         {
             if (!Function.IsLogin())
             {
                 Function._message = "Please login to confirm";
-                Function._returnUrl = "/admin/Blogcategories/create";
+                Function._returnUrl = $"/admin/categories/create";
                 return Redirect("/login");
             }
 
@@ -67,29 +56,29 @@ namespace WebHackathon.Areas.Admin.Controllers
             return View();
         }
 
-        // POST: Admin/BlogCategories/Create
+        // POST: Admin/Categories/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BlogCategoryId,Title,Description")] TbBlogCategory tbBlogCategory)
+        public async Task<IActionResult> Create([Bind("CategoryId,Title,Description")] TbCategory tbCategory)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(tbBlogCategory);
+                _context.Add(tbCategory);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(tbBlogCategory);
+            return View(tbCategory);
         }
 
-        // GET: Admin/BlogCategories/Edit/5
+        // GET: Admin/Categories/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (!Function.IsLogin())
             {
                 Function._message = "Please login to confirm";
-                Function._returnUrl = $"/admin/BlogCategories/{id}";
+                Function._returnUrl = $"/admin/categories/{id}";
                 return Redirect("/login");
             }
 
@@ -103,22 +92,22 @@ namespace WebHackathon.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var tbBlogCategory = await _context.TbBlogCategories.FindAsync(id);
-            if (tbBlogCategory == null)
+            var tbCategory = await _context.TbCategories.FindAsync(id);
+            if (tbCategory == null)
             {
                 return NotFound();
             }
-            return View(tbBlogCategory);
+            return View(tbCategory);
         }
 
-        // POST: Admin/BlogCategories/Edit/5
+        // POST: Admin/Categories/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("BlogCategoryId,Title,Description")] TbBlogCategory tbBlogCategory)
+        public async Task<IActionResult> Edit(int id, [Bind("CategoryId,Title,Description")] TbCategory tbCategory)
         {
-            if (id != tbBlogCategory.BlogCategoryId)
+            if (id != tbCategory.CategoryId)
             {
                 return NotFound();
             }
@@ -127,12 +116,12 @@ namespace WebHackathon.Areas.Admin.Controllers
             {
                 try
                 {
-                    _context.Update(tbBlogCategory);
+                    _context.Update(tbCategory);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TbBlogCategoryExists(tbBlogCategory.BlogCategoryId))
+                    if (!TbCategoryExists(tbCategory.CategoryId))
                     {
                         return NotFound();
                     }
@@ -143,43 +132,28 @@ namespace WebHackathon.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(tbBlogCategory);
+            return View(tbCategory);
         }
 
-    
-
-        // POST: Admin/BlogCategories/Delete/5
+      
+        // POST: Admin/Categories/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-
-            if (!Function.IsLogin())
+            var tbCategory = await _context.TbCategories.FindAsync(id);
+            if (tbCategory != null)
             {
-                Function._message = "Please login to confirm";
-                Function._returnUrl = "/admin/BLogcategories";
-                return Redirect("/login");
-            }
-
-            if (Function._userrole == 1)
-            {
-                Function._message = "You can't visit this site";
-                return Redirect("/home");
-            }
-
-            var tbBlogCategory = await _context.TbBlogCategories.FindAsync(id);
-            if (tbBlogCategory != null)
-            {
-                _context.TbBlogCategories.Remove(tbBlogCategory);
+                _context.TbCategories.Remove(tbCategory);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool TbBlogCategoryExists(int id)
+        private bool TbCategoryExists(int id)
         {
-            return _context.TbBlogCategories.Any(e => e.BlogCategoryId == id);
+            return _context.TbCategories.Any(e => e.CategoryId == id);
         }
     }
 }
