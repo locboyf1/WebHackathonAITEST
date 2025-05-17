@@ -32,8 +32,8 @@
                             </div>
 
                             <div class="mb-3">
-                                <label class="form-label" for="a9">Description</label>
-                                <textarea class="form-control" id="a9" asp-for="Description" placeholder="Enter description" rows="3" required></textarea>
+                                <label class="form-label" for="Description">Description</label>
+                                <textarea class="form-control" id="Description" asp-for="Description" placeholder="Enter description" rows="3" required></textarea>
                             </div>
                         </div>
                     </div>
@@ -52,7 +52,11 @@
 </div>
 <!-- App body ends -->
 @section Scripts {
+
     @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        var summerNote = new WebHackathon.Areas.Admin.Models.SummerNote("#Description");
+        <partial name="_SummerNote" model="summerNote" />
+
     }
+
 }

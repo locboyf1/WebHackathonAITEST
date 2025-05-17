@@ -40,14 +40,14 @@
                         <div class="col-sm-8 col-12">
                             <div class="col-lg-3 col-sm-4 col-12">
                                 <div class="mb-3">
-                                    <label class="form-label" for="a1">Name</label>
+                                    <label class="form-label" for="Description">Name</label>
                                     <input type="text" asp-for="Name" class="form-control" id="a1" placeholder="Enter fullname" required>
                                 </div>
                             </div>
 
                             <div class="mb-3">
                                 <label class="form-label" for="a9">Description</label>
-                                <textarea class="form-control" id="a9" asp-for="Description" placeholder="Enter description" rows="3" required></textarea>
+                                <textarea class="form-control" id="Description" asp-for="Description" placeholder="Enter description" rows="3" required></textarea>
                             </div>
                         </div>
                     </div>
@@ -67,6 +67,11 @@
 <!-- App body ends -->
 
 @section Scripts {
+
+    @{
+        var summerNote = new WebHackathon.Areas.Admin.Models.SummerNote("#Description");
+        <partial name="_SummerNote" model="summerNote" />
+    }
 
     <script>
         function previewImage(event) {
