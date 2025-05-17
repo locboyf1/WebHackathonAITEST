@@ -17,8 +17,6 @@ public partial class TbBlog
 
     public string? Detail { get; set; }
 
-    public int? TagBlogId { get; set; }
-
     public string? Image { get; set; }
 
     public DateTime? Date { get; set; }

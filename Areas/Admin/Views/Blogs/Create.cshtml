@@ -1,0 +1,112 @@
+﻿@model WebHackathon.Models.TbBlog
+@using WebHackathon.Utilities;
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<!-- App body starts -->
+<div class="app-body">
+
+    <!-- Row starts -->
+    <div class="row gx-3">
+        <div class="col-sm-12">
+            <div class="card mb-3">
+                <form asp-action="Create" method="post" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="UserId" value="@Function._userid" />
+                    <div class="card-header">
+                        <h5 class="card-title">Add a Blog</h5>
+                    </div>
+                    <div class="card-body">
+                        <!-- Row starts -->
+                        <div class="row gx-3">
+                            <div class="col-lg-8 col-sm-12 col-6">
+                                <div class="mb-3">
+                                    <label for="formFile" class="form-label">Image</label>
+                                    <input class="form-control" name="img" type="file" id="formFile" accept="image/*" onchange="previewImage(event)" required>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <img src="#" class="img-6x rounded-circle" id="imagePreview" style="display: none; margin: auto" />
+                            </div>
+
+                        </div>
+                        <!-- Row ends -->
+
+                        <div class="mb-3">
+                            <div class="col-lg-8 col-sm-12 col-6">
+
+                                <label class="form-label">Selcet category</label>
+                                <select class="form-select" asp-for="BlogCategoryId" aria-label="Default select example" asp-items="@ViewBag.BlogCategoryId"> </select>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-8 col-12">
+                            <div class="col-lg-3 col-sm-4 col-12">
+                                <div class="mb-3">
+                                    <label class="form-label" for="Title">Name</label>
+                                    <input type="text" asp-for="Title" class="form-control" id="a1" placeholder="Enter Title" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="col-lg-8 col-sm-12 col-6">
+
+                                <label class="form-label" for="Description">Description</label>
+                                <textarea class="form-control" id="Description" asp-for="Description" placeholder="Enter description" rows="3" required></textarea>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label" for="Detail">Detail</label>
+                            <textarea class="form-control" id="Detail" asp-for="Detail" placeholder="Enter the content" rows="3" required></textarea>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" asp-for="IsShow" id="invalidCheck" required="">
+                            <label class="form-check-label" for="invalidCheck">
+                                Show
+                            </label>
+
+                        </div>
+
+                    </div>
+                    <div class="card-footer">
+                        <div class="d-flex gap-2 justify-content-end">
+                            <a asp-action="Index" class="btn btn-outline-secondary"> Cancel  </a>
+                            <button type="submit" class="btn btn-primary">  Create </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Row ends -->
+</div>
+<!-- App body ends -->
+@section Scripts {
+
+    @{
+        var summerNote = new WebHackathon.Areas.Admin.Models.SummerNote("#Detail");
+        <partial name="_SummerNote" model="summerNote" />
+    }
+
+    <script>
+        function previewImage(event) {
+            const input = event.target;
+            const preview = document.getElementById('imagePreview');
+
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    preview.src = e.target.result;
+                    preview.style.display = "block";
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+
+}
