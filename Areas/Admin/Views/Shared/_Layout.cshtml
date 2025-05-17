@@ -284,32 +284,46 @@
             <!-- Sidebar wrapper start -->
             <nav id="sidebar" class="sidebar-wrapper">
 
-                <!-- Sidebar profile starts -->
-                <div class="shop-profile">
-                    <p class="mb-1 fw-bold text-primary">Walmart</p>
-                    <p class="m-0">Los Angeles, California</p>
-                </div>
+                    <!-- Sidebar profile starts -->
+                @* <div class="shop-profile"> *@
+                @*     <p class="mb-1 fw-bold text-primary">Walmart</p> *@
+                @*     <p class="m-0">Los Angeles, California</p> *@
+                @* </div> *@
                 <!-- Sidebar profile ends -->
                 <!-- Sidebar menu starts -->
                 <div class="sidebarMenuScroll">
                     <ul class="sidebar-menu">
-                        <li class="active current-page">
-                            <a href="index.html">
+                        <li class=" @(ViewBag.Active == "home" ? "current-page" : "") ">
+                            <a href="/admin">
                                 <i class="bi bi-pie-chart"></i>
                                 <span class="menu-text">Dashboard</span>
                             </a>
                         </li>
-                        <li>
+                        <li class="@(ViewBag.Active == "authors" ? "current-page" : "")">
                             <a asp-area="Admin" asp-controller="Authors" asp-action="index">
                                 <i class="bi bi-person-badge"></i>
                                 <span class="menu-text">Tác giả</span>
                             </a>
                         </li>
-                        <li>
+                        <li class="@(ViewBag.Active == "publishers" ? "current-page" : "")">
                             <a asp-area="Admin" asp-controller="Publishers" asp-action="index">
                                 <i class="bi bi-journals"></i>
                                 <span class="menu-text">Nhà xuất bản</span>
                             </a>
+                        </li>
+                        <li class="treeview @(ViewBag.Active == "categories" ? "current-page" : "")">
+                            <a href="#!">
+                                <i class="bi bi-collection"></i>
+                                <span class="menu-text">Danh mục</span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li>
+                                    <a href="/admin/blogcategories">Danh mục bài viết</a>
+                                </li>
+                                <li>
+                                    <a href="/admin/categories">Danh mục sách</a>
+                                </li>
+                            </ul>
                         </li>
                         <li>
                             <a href="calendar.html">
@@ -361,7 +375,6 @@
                     </ul>
                 </div>
                 <!-- Sidebar menu ends -->
-
             </nav>
             <!-- Sidebar wrapper end -->
             <!-- App container starts -->
@@ -379,19 +392,19 @@
                         </li>
                     </ol>
                     <!-- Breadcrumb end -->
-                    <!-- Sales stats start -->
-                    <div class="ms-auto d-lg-flex d-none flex-row">
-                        <div class="d-flex flex-row gap-2">
-                            <button class="btn btn-sm btn-primary">Today</button>
-                            <button class="btn btn-sm btn-white">7d</button>
-                            <button class="btn btn-sm btn-white">2w</button>
-                            <button class="btn btn-sm btn-white">1m</button>
-                            <button class="btn btn-sm btn-white">3m</button>
-                            <button class="btn btn-sm btn-white">6m</button>
-                            <button class="btn btn-sm btn-white">1y</button>
-                        </div>
-                    </div>
-                    <!-- Sales stats end -->
+                    @* <!-- Sales stats start --> *@
+                    @* <div class="ms-auto d-lg-flex d-none flex-row"> *@
+                    @*     <div class="d-flex flex-row gap-2"> *@
+                    @*         <button class="btn btn-sm btn-primary">Today</button> *@
+                    @*         <button class="btn btn-sm btn-white">7d</button> *@
+                    @*         <button class="btn btn-sm btn-white">2w</button> *@
+                    @*         <button class="btn btn-sm btn-white">1m</button> *@
+                    @*         <button class="btn btn-sm btn-white">3m</button> *@
+                    @*         <button class="btn btn-sm btn-white">6m</button> *@
+                    @*         <button class="btn btn-sm btn-white">1y</button> *@
+                    @*     </div> *@
+                    @* </div> *@
+                    @* <!-- Sales stats end --> *@
 
                 </div>
                 <!-- App Hero header ends -->
