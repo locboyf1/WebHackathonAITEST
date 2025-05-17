@@ -29,6 +29,8 @@ public partial class DbHackathonContext : DbContext
 
     public virtual DbSet<TbCategory> TbCategories { get; set; }
 
+    public virtual DbSet<TbChapterBook> TbChapterBooks { get; set; }
+
     public virtual DbSet<TbComment> TbComments { get; set; }
 
     public virtual DbSet<TbContact> TbContacts { get; set; }
@@ -49,9 +51,9 @@ public partial class DbHackathonContext : DbContext
 
     public virtual DbSet<TbUser> TbUsers { get; set; }
 
-//    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-//        => optionsBuilder.UseSqlServer("data source= QUANGLOCPC\\QUANGLOC; initial catalog=DbHackathon; integrated security=True; TrustServerCertificate=True;");
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseSqlServer("data source= QUANGLOCPC\\QUANGLOC; initial catalog=DbHackathon; integrated security=True; TrustServerCertificate=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -67,7 +69,6 @@ public partial class DbHackathonContext : DbContext
             entity.ToTable("TB_Author");
 
             entity.Property(e => e.AuthorId).HasColumnName("AuthorID");
-            entity.Property(e => e.Description).HasMaxLength(300);
             entity.Property(e => e.Image).HasMaxLength(200);
             entity.Property(e => e.Name).HasMaxLength(80);
         });
@@ -89,10 +90,12 @@ public partial class DbHackathonContext : DbContext
 
             entity.HasOne(d => d.BlogCategory).WithMany(p => p.TbBlogs)
                 .HasForeignKey(d => d.BlogCategoryId)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_TB_Blog_TB_BlogCategory");
 
             entity.HasOne(d => d.User).WithMany(p => p.TbBlogs)
                 .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_TB_Blog_TB_User");
         });
 
@@ -124,14 +127,17 @@ public partial class DbHackathonContext : DbContext
 
             entity.HasOne(d => d.Author).WithMany(p => p.TbBooks)
                 .HasForeignKey(d => d.AuthorId)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_TB_Book_TB_Author");
 
             entity.HasOne(d => d.Category).WithMany(p => p.TbBooks)
                 .HasForeignKey(d => d.CategoryId)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_TB_Book_TB_Category");
 
             entity.HasOne(d => d.Publisher).WithMany(p => p.TbBooks)
                 .HasForeignKey(d => d.PublisherId)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_TB_Book_TB_Publisher");
         });
 
@@ -149,10 +155,12 @@ public partial class DbHackathonContext : DbContext
 
             entity.HasOne(d => d.Book).WithMany(p => p.TbCarts)
                 .HasForeignKey(d => d.BookId)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_TB_Cart_TB_Book");
 
             entity.HasOne(d => d.User).WithMany(p => p.TbCarts)
                 .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_TB_Cart_TB_User");
         });
 
@@ -165,6 +173,24 @@ public partial class DbHackathonContext : DbContext
             entity.Property(e => e.CategoryId).HasColumnName("CategoryID");
             entity.Property(e => e.Description).HasMaxLength(200);
             entity.Property(e => e.Title).HasMaxLength(50);
+        });
+
+        modelBuilder.Entity<TbChapterBook>(entity =>
+        {
+            entity.HasKey(e => e.ChapterBookId);
+
+            entity.ToTable("TB_ChapterBook");
+
+            entity.Property(e => e.ChapterBookId)
+                .ValueGeneratedNever()
+                .HasColumnName("ChapterBookID");
+            entity.Property(e => e.BookId).HasColumnName("BookID");
+            entity.Property(e => e.Subject).HasMaxLength(500);
+
+            entity.HasOne(d => d.Book).WithMany(p => p.TbChapterBooks)
+                .HasForeignKey(d => d.BookId)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("FK_TB_ChapterBook_TB_Book");
         });
 
         modelBuilder.Entity<TbComment>(entity =>
@@ -181,6 +207,7 @@ public partial class DbHackathonContext : DbContext
 
             entity.HasOne(d => d.Blog).WithMany(p => p.TbComments)
                 .HasForeignKey(d => d.BlogId)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_TB_Comment_TB_Blog");
         });
 
@@ -195,6 +222,7 @@ public partial class DbHackathonContext : DbContext
                 .HasMaxLength(150)
                 .IsUnicode(false);
             entity.Property(e => e.Name).HasMaxLength(80);
+            entity.Property(e => e.Time).HasColumnType("datetime");
             entity.Property(e => e.Title).HasMaxLength(100);
         });
 
@@ -211,10 +239,12 @@ public partial class DbHackathonContext : DbContext
 
             entity.HasOne(d => d.Book).WithMany(p => p.TbDownloadeds)
                 .HasForeignKey(d => d.BookId)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_TB_Downloaded_TB_Book");
 
             entity.HasOne(d => d.User).WithMany(p => p.TbDownloadeds)
                 .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_TB_Downloaded_TB_User");
         });
 
@@ -229,6 +259,7 @@ public partial class DbHackathonContext : DbContext
                 .HasMaxLength(15)
                 .IsUnicode(false);
             entity.Property(e => e.ParentId).HasColumnName("ParentID");
+            entity.Property(e => e.Title).HasMaxLength(50);
             entity.Property(e => e.Url)
                 .HasMaxLength(100)
                 .HasColumnName("URL");
@@ -259,6 +290,7 @@ public partial class DbHackathonContext : DbContext
 
             entity.HasOne(d => d.Book).WithMany(p => p.TbReviews)
                 .HasForeignKey(d => d.BookId)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_TB_Review_TB_Book");
         });
 
@@ -285,6 +317,7 @@ public partial class DbHackathonContext : DbContext
 
             entity.HasOne(d => d.Book).WithMany(p => p.TbSavedBooks)
                 .HasForeignKey(d => d.BookId)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_TB_SavedBook_TB_Book");
         });
 
@@ -300,7 +333,6 @@ public partial class DbHackathonContext : DbContext
 
             entity.HasOne(d => d.Blog).WithMany(p => p.TbTagBlogs)
                 .HasForeignKey(d => d.BlogId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_TB_TagBlog_TB_Blog");
         });
 
@@ -323,6 +355,7 @@ public partial class DbHackathonContext : DbContext
 
             entity.HasOne(d => d.Role).WithMany(p => p.TbUsers)
                 .HasForeignKey(d => d.RoleId)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_TB_User_TB_Role");
         });
 
