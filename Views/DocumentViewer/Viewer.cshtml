@@ -1,0 +1,264 @@
+﻿@{
+    ViewData["Title"] = "Xem tài liệu PDF";
+    var fileName = ViewBag.FileName as string;
+}
+@section Styles {
+    <style>
+        
+        #pdf-canvas {
+            border: 1px solid #ccc;
+            width: auto;
+            /* max-height: 800px; */
+            display: block;
+            margin: 0 auto;
+            
+        }
+
+        .pdf-container {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: auto;
+            margin-bottom: 200px;
+        }
+
+        .file-name {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px 5px 0 0;
+            margin-bottom: 0;
+        }
+
+        .controls {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .page-info {
+            min-width: 120px;
+            text-align: center;
+        }
+        
+    </style>
+}
+<div class="container mt-4">
+    <div class="pdf-container">
+        <h3 class="file-name">Đang xem: <span id="fileName">document.pdf</span></h3>
+
+        <div class="canvas-container">
+            <canvas id="pdf-canvas"></canvas>
+        </div>
+
+        <div class="controls">
+            <button id="prev" class="btn btn-primary">
+                <i class="fa fa-arrow-left"></i> Trang trước
+            </button>
+            <div class="page-info btn btn-light">
+                Trang <span id="page-num">1</span> / <span id="page-count">?</span>
+            </div>
+            <button id="next" class="btn btn-primary">
+                Trang sau <i class="fa fa-arrow-right"></i>
+            </button>
+        </div>
+
+        <div class="mt-3"> 
+            <div class="form-group">
+                <label for="pdf-upload">Chọn file PDF:</label>
+                <input type="file" class="form-control-file" id="pdf-upload" accept="application/pdf">
+            </div>
+        </div>
+    </div>
+</div>
+@* @section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
+    <script>
+        // Get the fileName from a data attribute or from server-side rendering
+        const fileName = "@Html.Raw(fileName)";
+        const url = `/Documents/${fileName}`;
+
+        let pdfDoc = null, pageNum = 1, pageRendering = false, pageNumPending = null;
+        const canvas = document.getElementById("pdf-canvas");
+        const ctx = canvas.getContext("2d");
+
+        function renderPage(num) {
+            pageRendering = true;
+            pdfDoc.getPage(num).then(page => {
+                const viewport = page.getViewport({ scale: 1.5 });
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+                const renderContext = {
+                    canvasContext: ctx,
+                    viewport: viewport
+                };
+                const renderTask = page.render(renderContext);
+                renderTask.promise.then(() => {
+                    pageRendering = false;
+                    if (pageNumPending !== null) {
+                        renderPage(pageNumPending);
+                        pageNumPending = null;
+                    }
+                });
+                document.getElementById("page-num").textContent = num;
+            });
+        }
+
+        function queueRenderPage(num) {
+            if (pageRendering) {
+                pageNumPending = num;
+            } else {
+                renderPage(num);
+            }
+        }
+
+        document.getElementById("prev").addEventListener("click", () => {
+            if (pageNum <= 1) return;
+            pageNum--;
+            queueRenderPage(pageNum);
+        });
+
+        document.getElementById("next").addEventListener("click", () => {
+            if (pageNum >= pdfDoc.numPages) return;
+            pageNum++;
+            queueRenderPage(pageNum);
+        });
+
+        pdfjsLib.getDocument(url).promise.then(pdfDoc_ => {
+            pdfDoc = pdfDoc_;
+            document.getElementById("page-count").textContent = pdfDoc.numPages;
+            renderPage(pageNum);
+        }).catch(error => {
+            console.error("Error loading PDF:", error);
+            document.getElementById("pdf-canvas").insertAdjacentHTML('afterend',
+                `<div class="alert alert-danger">Không thể tải tài liệu PDF. Lỗi: ${error.message}</div>`);
+        });
+    </script>
+} *@
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
+    <script>
+        // Lấy fileName từ Razor
+        const fileName = "@Html.Raw(fileName)";
+        const url = `/Documents/${fileName}`;
+
+        // Set PDF.js worker path
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.worker.min.js';
+
+        let pdfDoc = null;
+        let pageNum = 1;
+        let pageRendering = false;
+        let pageNumPending = null;
+        let scale = 2.5;
+        let canvas = document.getElementById('pdf-canvas');
+        let ctx = canvas.getContext('2d');
+
+        // Render the page
+        function renderPage(num) {
+            pageRendering = true;
+
+            // Using promise to fetch the page
+            pdfDoc.getPage(num).then(function(page) {
+                let viewport = page.getViewport({ scale: scale });
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+
+                // Render PDF page into canvas context
+                let renderContext = {
+                    canvasContext: ctx,
+                    viewport: viewport
+                };
+
+                let renderTask = page.render(renderContext);
+
+                // Wait for rendering to finish
+                renderTask.promise.then(function() {
+                    pageRendering = false;
+                    if (pageNumPending !== null) {
+                        // New page rendering is pending
+                        renderPage(pageNumPending);
+                        pageNumPending = null;
+                    }
+                });
+            });
+
+            // Update page counters
+            document.getElementById('page-num').textContent = num;
+        }
+
+        // Go to previous page
+        function previousPage() {
+            if (pageNum <= 1) {
+                return;
+            }
+            pageNum--;
+            queueRenderPage(pageNum);
+        }
+
+        // Go to next page
+        function nextPage() {
+            if (pageNum >= pdfDoc.numPages) {
+                return;
+            }
+            pageNum++;
+            queueRenderPage(pageNum);
+        }
+
+        // Queue the page rendering
+        function queueRenderPage(num) {
+            if (pageRendering) {
+                pageNumPending = num;
+            } else {
+                renderPage(num);
+            }
+        }
+
+        // Load a PDF from URL or file
+        function loadPDF(source, isUrl = true) {
+            const loadingTask = isUrl
+                ? pdfjsLib.getDocument(source)
+                : pdfjsLib.getDocument({ data: source });
+
+            loadingTask.promise.then(function(pdf) {
+                pdfDoc = pdf;
+                document.getElementById('page-count').textContent = pdf.numPages;
+
+                // Initial page rendering
+                renderPage(pageNum);
+            }).catch(error => {
+                console.error("Error loading PDF:", error);
+                canvas.insertAdjacentHTML('afterend',
+                    `<div class="alert alert-danger">Không thể tải tài liệu PDF. Lỗi: ${error.message}</div>`);
+            });
+        }
+
+        // Handle file upload
+        document.getElementById('pdf-upload').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file && file.type === 'application/pdf') {
+                // Reset to first page
+                pageNum = 1;
+
+                // Read the file
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    loadPDF(new Uint8Array(event.target.result), false);
+                };
+                reader.readAsArrayBuffer(file);
+            }
+        });
+
+        // Event listeners for buttons
+        document.getElementById('prev').addEventListener('click', previousPage);
+        document.getElementById('next').addEventListener('click', nextPage);
+
+        // Nếu có fileName từ server, load file đó
+        if (fileName && fileName.trim() !== "") {
+            loadPDF(url);
+        }
+    </script>
+}

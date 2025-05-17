@@ -17,7 +17,13 @@ builder.Services.AddScoped<DocumentEmbeddingService>();
 builder.Services.AddScoped<DocumentChunkService>();
 builder.Services.AddScoped<CohereEmbeddingService>();
 
-
+// Set GroupDocs license
+string licensePath = Path.Combine(builder.Environment.ContentRootPath, "groupdocs.license");
+if (System.IO.File.Exists(licensePath))
+{
+    GroupDocs.Viewer.License license = new GroupDocs.Viewer.License();
+    license.SetLicense(licensePath);
+}
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

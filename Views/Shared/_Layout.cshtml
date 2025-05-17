@@ -27,7 +27,8 @@
     <!-- Stylesheet -->
     <link rel="stylesheet" href="/assets/css/jquery-ui.min.css">
     <link href="/assets/css/style.css" rel="stylesheet" type="text/css" />
-
+    <link href="/assets/css/viewer.css" rel="stylesheet" />
+    @RenderSection("Styles", required: false)
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -176,8 +177,11 @@
     </footer>
     <!-- End: Footer -->
     <!-- jQuery Latest Version 1.x -->
-    <script src="http://code.jquery.com/jquery-2.2.3.min.js"></script>
+ 
+    @* <script src="http://code.jquery.com/jquery-2.2.3.min.js"></script> *@
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+    @RenderSection("Scripts", required: false)
     <!-- jQuery UI -->
     <script src="/assets/js/jquery-ui.min.js"></script>
 
@@ -230,7 +234,7 @@
     <!-- Custom Scripts -->
     <script src="/assets/js/main.js"></script>
 
-    @RenderSection("Scripts", required: false)
+   
 
 </body>
 
