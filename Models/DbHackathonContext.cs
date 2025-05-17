@@ -88,7 +88,6 @@ public partial class DbHackathonContext : DbContext
             entity.Property(e => e.Date).HasColumnType("datetime");
             entity.Property(e => e.Description).HasMaxLength(300);
             entity.Property(e => e.Image).HasMaxLength(100);
-            entity.Property(e => e.TagBlogId).HasColumnName("TagBlogID");
             entity.Property(e => e.Title).HasMaxLength(150);
             entity.Property(e => e.UserId).HasColumnName("UserID");
 

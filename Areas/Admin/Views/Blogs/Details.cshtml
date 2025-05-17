@@ -1,0 +1,86 @@
+﻿@model WebHackathon.Models.TbBlog
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+<style>
+    dt, dd{
+        margin-top: 50px;
+    }
+</style>
+}
+
+<div class="app-body">
+    <h5>Details</h5>
+
+    <div>
+        <h4>TbBlog</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Title)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Title)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Detail)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.Raw(@Model.Detail)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Image)
+            </dt>
+            <dd class="col-sm-10">
+                <img src="@Model.Image" class="img-6x rounded-circle" id="imagePreview" style=" margin: auto" />
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Date)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Date)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.LikeCount)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.LikeCount)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ViewCount)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.ViewCount)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.IsShow)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.IsShow)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.BlogCategory)
+            </dt>
+            <dd class="col-sm-10">
+                @Model.BlogCategory.Title
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.User)
+            </dt>
+            <dd class="col-sm-10">
+                @Model.User.Name
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.BlogId">Edit</a> |
+        <a asp-action="Index">Back to List</a>
+    </div>
+</div>
