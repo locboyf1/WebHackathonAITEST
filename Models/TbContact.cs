@@ -15,5 +15,7 @@ public partial class TbContact
 
     public string? Detail { get; set; }
 
+    public DateTime? Time { get; set; }
+
     public bool IsResponded { get; set; }
 }

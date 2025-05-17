@@ -1,0 +1,46 @@
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using WebHackathon.Models;
+
+namespace WebHackathon.ViewComponents
+{
+    public class MenuBookView : ViewComponent
+    {
+        private readonly DbHackathonContext _context;
+
+        public MenuBookView(DbHackathonContext context)
+        {
+            _context = context;
+        }
+
+        public async Task<IViewComponentResult> InvokeAsync()
+        {
+            var books = await _context.TbBooks
+                .Include(b => b.Author)
+                .Include(b => b.Category)
+                .OrderBy(b => b.BookId)
+                .Take(10)
+                .Select(b => new BookInfoDto
+                {
+                    Title = b.Title,
+                    AuthorName = b.Author != null ? b.Author.Name : "Unknown",
+                    CategoryName = b.Category != null ? b.Category.Title : "No Category",
+                    Description = b.Description
+                })
+                .ToListAsync();
+
+            return View("Default", books);
+        }
+    }
+
+    public class BookInfoDto
+    {
+        public string Title { get; set; }
+        public string AuthorName { get; set; }
+        public string CategoryName { get; set; }
+        public string Description { get; set; }
+    }
+}

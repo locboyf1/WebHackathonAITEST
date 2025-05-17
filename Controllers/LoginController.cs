@@ -59,7 +59,7 @@ namespace WebHackathon.Controllers
             Function._userid = 0;
             Function._userrole = 0;
             Function._useravatar = string.Empty;
-            Function._message = "Đăng xuất thành công";
+            Function._message = "Logout success!";
             return RedirectToAction("Index", "Home");
         }
     }
