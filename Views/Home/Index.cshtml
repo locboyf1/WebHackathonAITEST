@@ -96,33 +96,19 @@
 <!-- Start: Search Section -->
 <div class="search-filters search-filter-v2">
     <div class="filter-box">
-        <form action="https://skille.presstigers.dev/index.html" method="get">
+        <form action="/preview" method="get">
             <div class="row">
                 <div class="col-md-6">
                     <input class="form-control" placeholder="Search by Keyword" id="keywords" name="keywords"
                         type="text">
                 </div>
                 <div class="col-md-6">
-                    <select name="catalog" id="catalog" class="form-control">
-                        <option>Search the Catalog</option>
-                        <option>Catalog 01</option>
-                        <option>Catalog 02</option>
-                        <option>Catalog 03</option>
-                        <option>Catalog 04</option>
-                        <option>Catalog 05</option>
-                    </select>
+                    @await Component.InvokeAsync("Catalog")
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <select name="category" id="category" class="form-control">
-                        <option>All Categories</option>
-                        <option>Category 01</option>
-                        <option>Category 02</option>
-                        <option>Category 03</option>
-                        <option>Category 04</option>
-                        <option>Category 05</option>
-                    </select>
+                    @await Component.InvokeAsync("Categories")
                 </div>
                 <div class="col-md-6">
                     <input class="form-control" type="submit" value="Search">
