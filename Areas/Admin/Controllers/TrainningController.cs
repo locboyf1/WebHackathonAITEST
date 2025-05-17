@@ -25,7 +25,7 @@ namespace WebHackathon.Areas.Admin.Controllers
             if (!Function.IsLogin())
             {
                 Function._message = "Please login to confirm";
-                Function._returnUrl = "/admin";
+                Function._returnUrl = "/admin/trainning";
                 return Redirect("/login");
             }
 
