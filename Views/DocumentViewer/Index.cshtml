@@ -1,0 +1,28 @@
+﻿@model List<string>
+
+@{
+    ViewData["Title"] = "Chọn tài liệu PDF để xem";
+}
+
+<h2 class="mb-4">📄 Danh sách tài liệu PDF</h2>
+@if (!Model.Any())
+{
+    <div class="alert alert-warning">
+        Không tìm thấy tài liệu nào trong thư mục <strong>wwwroot/Documents</strong>.
+    </div>
+}
+else
+{
+    <div class="list-group">
+        @foreach (var file in Model)
+        {
+            <div class="list-group-item d-flex justify-content-between align-items-center">
+                <span>@file</span>
+                <a class="btn btn-sm btn-primary"
+                   href="@Url.Action("ViewPdf", "DocumentViewer", new { fileName = file })">
+                    📄 Xem tài liệu →
+                </a>
+            </div>
+        }
+    </div>
+}
