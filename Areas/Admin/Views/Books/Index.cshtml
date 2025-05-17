@@ -1,0 +1,74 @@
+@model IEnumerable<WebHackathon.Models.TbBook>
+
+@{
+    ViewData["Title"] = "Book manager";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    ViewBag.Active = "books";
+}
+
+<div class="app-body">
+    <a class="mb-3 btn btn-info" asp-action="Create"><i class="bi bi-plus-square"></i> Add a new book</a>
+
+    <div class="row gx-3">
+        <div class="col-xxl-12">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table align-middle table-hover m-0">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Rank</th>
+                                    <th scope="col">Title</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col" class="col-2">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    int i = 1;
+                                }
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@(i++)</td>
+                                        <td>@item.Title</td>
+                                        <td>@Html.Raw(item.Description)</td>
+                                        <td>
+                                            <a class="btn btn-success" asp-action="Edit"
+                                                asp-route-id="@item.BookId">Edit</a>
+
+                                            <form asp-action="Delete" method="post" onsubmit="return confirmSubmit()"
+                                                style="display:inline;">
+                                                <input type="hidden" name="id" value="@item.BookId" />
+                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <nav aria-label="Page Navigation" class="mt-3">
+                        <ul class="pagination">
+                            @for (int p = 1; p <= ViewBag.page_num; p++)
+                            {
+                                <li class="page-item @(ViewBag.page == p ? "active" : "")">
+                                    <a class="page-link" asp-route-page="@p" asp-action="Index">@p</a>
+                                </li>
+                            }
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function confirmSubmit() {
+            return window.confirm("Are you sure about that?");
+        }
+    </script>
+}

@@ -7,9 +7,9 @@
 
 <script>
     function HideShow() {
-    const mobilemenu = document.getElementById("mobile-menu");
+        const mobilemenu = document.getElementById("mobile-menu");
 
-       if(mobilemenu.style.display === "block") {
+        if (mobilemenu.style.display === "block") {
             mobilemenu.style.display = "none";
         } else {
             mobilemenu.style.display = "block";
@@ -31,20 +31,19 @@
             {
                 if (!menu2.Any(i => i.ParentId == item.MenuId))
                 {
-                    <li class="nav-item"><a class="nav-link @(ViewBag.Active == item.Alias ? "active" : "") " href="@item.Url">@item.Title</a></li>
+                    <li class="nav-item"><a class="nav-link @(ViewBag.Active == item.Alias ? "active" : "") "
+                            href="@item.Url">@item.Title</a></li>
                 }
                 else
                 {
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle @(menu2.Where(i => i.ParentId == item.MenuId).Any(i => i.Alias == ViewBag.Active) ? "active" : "")" href="@item.Url" data-toggle="dropdown" aria-expanded="false">@item.Title</a>
+                        <a class="nav-link dropdown-toggle @(menu2.Where(i => i.ParentId == item.MenuId).Any(i => i.Alias == ViewBag.Active) ? "active" : "")"
+                            href="@item.Url" data-toggle="dropdown" aria-expanded="false">@item.Title</a>
                         <ul class="dropdown-menu">
                             @foreach (var subitem in menu2.Where(i => i.ParentId == item.MenuId))
                             {
                                 <li><a href="@subitem.Url">@subitem.Title</a></li>
-
                             }
-
-
                         </ul>
                     </li>
                 }

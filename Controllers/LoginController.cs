@@ -2,7 +2,6 @@
 using WebHackathon.Models;
 using WebHackathon.Utilities;
 
-
 namespace WebHackathon.Controllers
 {
     public class LoginController : Controller
@@ -42,7 +41,8 @@ namespace WebHackathon.Controllers
             Function._useravatar = check.Avatar;
             Function._userrole = check.RoleId;
 
-            if(string.IsNullOrEmpty(Function._returnUrl)){
+            if (string.IsNullOrEmpty(Function._returnUrl))
+            {
                 return RedirectToAction("Index", "Home");
             }
 
