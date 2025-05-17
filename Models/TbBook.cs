@@ -29,6 +29,8 @@ public partial class TbBook
 
     public virtual TbPublisher? Publisher { get; set; }
 
+    public virtual ICollection<TbBorrow> TbBorrows { get; set; } = new List<TbBorrow>();
+
     public virtual ICollection<TbCart> TbCarts { get; set; } = new List<TbCart>();
 
     public virtual ICollection<TbChapterBook> TbChapterBooks { get; set; } = new List<TbChapterBook>();

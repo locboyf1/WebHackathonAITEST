@@ -25,7 +25,11 @@ public partial class TbUser
 
     public virtual ICollection<TbBlog> TbBlogs { get; set; } = new List<TbBlog>();
 
+    public virtual ICollection<TbBorrow> TbBorrows { get; set; } = new List<TbBorrow>();
+
     public virtual ICollection<TbCart> TbCarts { get; set; } = new List<TbCart>();
 
     public virtual ICollection<TbDownloaded> TbDownloadeds { get; set; } = new List<TbDownloaded>();
+
+    public virtual ICollection<TbUserFile> TbUserFiles { get; set; } = new List<TbUserFile>();
 }

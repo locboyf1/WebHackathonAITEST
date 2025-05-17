@@ -25,6 +25,8 @@ public partial class DbHackathonContext : DbContext
 
     public virtual DbSet<TbBook> TbBooks { get; set; }
 
+    public virtual DbSet<TbBorrow> TbBorrows { get; set; }
+
     public virtual DbSet<TbCart> TbCarts { get; set; }
 
     public virtual DbSet<TbCategory> TbCategories { get; set; }
@@ -51,9 +53,11 @@ public partial class DbHackathonContext : DbContext
 
     public virtual DbSet<TbUser> TbUsers { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("data source= QUANGLOCPC\\QUANGLOC; initial catalog=DbHackathon; integrated security=True; TrustServerCertificate=True;");
+    public virtual DbSet<TbUserFile> TbUserFiles { get; set; }
+
+//    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+//        => optionsBuilder.UseSqlServer("data source= QUANGLOCPC\\QUANGLOC; initial catalog=DbHackathon; integrated security=True; TrustServerCertificate=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -141,6 +145,27 @@ public partial class DbHackathonContext : DbContext
                 .HasConstraintName("FK_TB_Book_TB_Publisher");
         });
 
+        modelBuilder.Entity<TbBorrow>(entity =>
+        {
+            entity.HasKey(e => e.BorrowId);
+
+            entity.ToTable("TB_Borrow");
+
+            entity.Property(e => e.BorrowId).HasColumnName("BorrowID");
+            entity.Property(e => e.BookId).HasColumnName("BookID");
+            entity.Property(e => e.UserId).HasColumnName("UserID");
+
+            entity.HasOne(d => d.Book).WithMany(p => p.TbBorrows)
+                .HasForeignKey(d => d.BookId)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("FK_TB_Borrow_TB_Book");
+
+            entity.HasOne(d => d.User).WithMany(p => p.TbBorrows)
+                .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("FK_TB_Borrow_TB_User");
+        });
+
         modelBuilder.Entity<TbCart>(entity =>
         {
             entity.HasKey(e => e.CartId);
@@ -181,9 +206,7 @@ public partial class DbHackathonContext : DbContext
 
             entity.ToTable("TB_ChapterBook");
 
-            entity.Property(e => e.ChapterBookId)
-                .ValueGeneratedNever()
-                .HasColumnName("ChapterBookID");
+            entity.Property(e => e.ChapterBookId).HasColumnName("ChapterBookID");
             entity.Property(e => e.BookId).HasColumnName("BookID");
             entity.Property(e => e.Subject).HasMaxLength(500);
 
@@ -357,6 +380,23 @@ public partial class DbHackathonContext : DbContext
                 .HasForeignKey(d => d.RoleId)
                 .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_TB_User_TB_Role");
+        });
+
+        modelBuilder.Entity<TbUserFile>(entity =>
+        {
+            entity.HasKey(e => e.UserFileId);
+
+            entity.ToTable("TB_UserFile");
+
+            entity.Property(e => e.UserFileId).HasColumnName("UserFileID");
+            entity.Property(e => e.Image).HasMaxLength(200);
+            entity.Property(e => e.Path).HasMaxLength(200);
+            entity.Property(e => e.UserId).HasColumnName("UserID");
+
+            entity.HasOne(d => d.User).WithMany(p => p.TbUserFiles)
+                .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("FK_TB_UserFile_TB_User");
         });
 
         OnModelCreatingPartial(modelBuilder);
