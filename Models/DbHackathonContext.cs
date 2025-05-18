@@ -125,6 +125,7 @@ public partial class DbHackathonContext : DbContext
                 .HasMaxLength(300)
                 .HasColumnName("BookPDF");
             entity.Property(e => e.CategoryId).HasColumnName("CategoryID");
+            entity.Property(e => e.Image).HasMaxLength(300);
             entity.Property(e => e.PublisherId).HasColumnName("PublisherID");
             entity.Property(e => e.Title).HasMaxLength(200);
 

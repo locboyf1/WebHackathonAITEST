@@ -10,8 +10,6 @@
 <!-- App body starts -->
 <div class="app-body">
 
-    <a class="mb-3 btn btn-info " asp-action="Create"><i class="bi bi-plus-square"></i> Add a new publisher</a>
-
     <!-- Row start -->
     <div class="row gx-3">
         <div class="col-xxl-12">
@@ -24,7 +22,9 @@
                                     <th scope="col">Rank</th>
                                     <th scope="col">Email</th>
                                     <th scope="col">Name</th>
-                                    <th scope="col">RoleID</th>
+                                    <th scope="col">Role</th>
+                                    <th scope="col">Change Role</th>
+                                    <th scope="col">Lock</th>
                                     <th scope="col" class="col-2">Action</th>
 
                                 </tr>
@@ -39,15 +39,19 @@
                                         <td>@(i++)</td>
                                         <td>@item.Email</td>
                                         <td>@item.Name</td>
-                                        <td>@item.RoleId</td>
-                                        <form asp-action="Delete" method="post" onsubmit="return confirmSubmit()">
-                                            <td>
-                                                <a class="btn btn-success" asp-action="Edit"
-                                                    asp-route-id="@item.UserId">Edit</a>
-                                                <input type="hidden" name="id" value="@item.UserId" />
-                                                <button type="submit" class="btn btn-danger">Delete</button>
-                                            </td>
-                                        </form>
+                                        <td>@item.Role.Role</td>
+                                        <td>
+                                            <a class="btn btn-secondary" asp-action="ChangeRole" asp-route-id="@item.UserId" asp-route-role="1" >User</a>
+                                            <a class="btn btn-danger" asp-action="ChangeRole" asp-route-id="@item.UserId" asp-route-role="2">Administrator</a>
+                                            <a class="btn btn-warning" asp-action="ChangeRole" asp-route-id="@item.UserId" asp-route-role="3">Staff</a>
+                                        </td>
+                                        <td>
+                                            <a asp-action="LockUnlock" class="btn @(item.IsLock ? "btn-danger" : "btn-success") " asp-route-id="@item.UserId"><i class="bi @(item.IsLock ? "bi-person-fill-slash" : "bi-person-fill") "></i></a>
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-success" asp-action="Edit" asp-route-id="@item.UserId">Edit</a>
+                                        </td>
+
                                     </tr>
                                 }
 

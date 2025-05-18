@@ -61,38 +61,7 @@ namespace WebHackathon.Areas.Admin.Controllers
         }
 
 
-        // GET: Admin/Blogs/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (!Function.IsLogin())
-            {
-                Function._message = "Please login to confirm";
-                Function._returnUrl = $"/admin/blogs/details/{id}";
-                return Redirect("/login");
-            }
-
-            if (Function._userrole == 1)
-            {
-                Function._message = "You can't visit this site";
-                return Redirect("/home");
-            }
-
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var tbBlog = await _context.TbBlogs
-                .Include(t => t.BlogCategory)
-                .Include(t => t.User)
-                .FirstOrDefaultAsync(m => m.BlogId == id);
-            if (tbBlog == null)
-            {
-                return NotFound();
-            }
-
-            return View(tbBlog);
-        }
+        
 
         // GET: Admin/Blogs/Create
         public IActionResult Create()
@@ -152,13 +121,8 @@ namespace WebHackathon.Areas.Admin.Controllers
 
             _context.TbBlogs.Add(tbBlog);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return Redirect($"/admin/TagBlogs/{tbBlog.BlogId}");
 
-
-
-            ViewData["BlogCategoryId"] = new SelectList(_context.TbBlogCategories, "BlogCategoryId", "Title", tbBlog.BlogCategoryId);
-
-            return View(tbBlog);
         }
 
         // GET: Admin/Blogs/Edit/5

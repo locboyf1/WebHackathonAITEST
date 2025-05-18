@@ -1,0 +1,51 @@
+﻿@model TbUser
+<div class="row gx-3">
+    <div class="col-sm-12">
+        <div class="card mb-3">
+            <form asp-action="Edit" method="post" enctype="multipart/form-data">
+                <input type="hidden" asp-for="UserId" readonly />
+                <input type="hidden" asp-for="RoleId" readonly />
+                <input type="hidden" asp-for="Email" readonly />
+                <input type="hidden" asp-for="Password" readonly />
+                <input type="hidden" asp-for="IsLock" readonly />
+                <input type="hidden" asp-for="Balance" readonly />
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Avatar" />
+                <div class="card-header">
+                    <h5 class="card-title">Edit user: @Model.Name</h5>
+                </div>
+                <div class="card-body">
+                    <!-- Row starts -->
+                    <div class="row gx-3">
+                        <div class="col-lg-8 col-sm-12 col-6">
+                            <div class="mb-3">
+                                <label for="formFile" class="form-label">Image</label>
+                                <input class="form-control" name="img" type="file" id="formFile" accept="image/*" onchange="previewImage(event)">
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <img src="@Model.Avatar" class="img-6x rounded-circle" id="imagePreview" style=" margin: auto" />
+                        </div>
+
+                    </div>
+                    <!-- Row ends -->
+
+                    <div class="col-sm-8 col-12">
+                        <div class="col-lg-3 col-sm-4 col-12">
+                            <div class="mb-3">
+                                <label class="form-label" for="name">Name</label>
+                                <input type="text" asp-for="Name" class="form-control"  placeholder="Enter fullname" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="d-flex gap-2 justify-content-end">
+                        <a asp-action="Index" class="btn btn-outline-secondary"> Cancel  </a>
+                        <button type="submit" class="btn btn-primary">  Save </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
