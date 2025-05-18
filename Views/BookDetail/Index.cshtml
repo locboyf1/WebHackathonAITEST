@@ -55,9 +55,9 @@
                                             </div>
                                             <div class="book-detail">
                                                 <a class="category-tags bg-yellow">Magazine</a>
-                                                {
+
                                                 <h3 class="book-media-title">@Model.Title</h3>
-                                                }
+
                                                 <div class="rating-box">
                                                     <div class="rating">
                                                         <input type="radio" id="star5" name="rating" value="5" /><label
@@ -133,7 +133,7 @@
                                         <div class="col-md-12 col-lg-3 d-flex align-items-center">
                                             <div class="item-payment-info">
 
-                                                <span class="price-tag">@Model.Price<s>200.000</s><i>30-Day Money-Back
+                                                <span class="price-tag">@Model.Score<s>700</s><i>30-Day Money-Back
                                                         Guarantee</i></span>
 
                                                 <p><img src="images/icons/shipping-icon.png" alt=""> Free shipping
@@ -197,80 +197,111 @@
                                         <label for="tab4">Reviews</label>
 
                                         <div class="tab-content-wrapper">
-                                            <div id="tab-content-1" class="tab-content">
-<<<<<<< HEAD
-                                                <h3>Read PDF File</h3>
+                                            < id="tab-content-1" class="tab-content">
+                                                <h3>Read preview</h3>
+                                                <div
+                                                    style="height: 600px; overflow-y: auto; border: 1px solid #ccc; padding: 10px;">
+                                                    <canvas id="pdf-page-1"
+                                                        style="width: 80%; height: auto; margin-bottom: 20px;"></canvas>
+                                                    <canvas id="pdf-page-2" style="width: 80%; height: auto;"></canvas>
+                                                </div>
 
-                                                <iframe src="/pdf/1.pdf" width="100%" height="1000px"></iframe>
+                                                <script
+                                                    src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
 
-=======
-                                                <p>@Model.Description</p>
-                                                <a class="sub-title" asp-controller="DocumentViewer" asp-action="ViewPdf" asp-route-id="@Model.BookId" asp-route-returnUrl="@Context.Request.Path">Xem thêm</a>
->>>>>>> origin/GroupviewFile
-                                            </div>
-                                            <div id="tab-content-2" class="tab-content">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-                                                    efficitur
-                                                    mattis nibh, non ornare neque. In bibendum consequat imperdiet. Duis
-                                                    eros ex, vestibulum vel fermentum ut, gravida at turpis.
-                                                    Etiam porta sem dolor, at finibus metus consequat a. Aliquam erat
-                                                    volutpat. </p>
-                                            </div>
-                                            <div id="tab-content-3" class="tab-content">
-                                                <span class="sub-title">User Rating</span>
-                                                <h2 class="section-title">Readers Reviews
-                                                </h2>
-                                                <p class="lead-text">Sed nec fermentum leo. Vestibulum pulvinar, risus
-                                                    quis
-                                                    mollis posuere, lorem lectus pretium turpis, non elementum eros
-                                                    metus ut
-                                                    purus. Morbi hendrerit molestie augue luctus euismod. </p>
-                                                <span class="sub-title">Your rating</span>
-                                                <h2 class="section-title">Write Your Comment
-                                                </h2>
-                                                <div class="product-rating">
-                                                    <div class="rating-box">
-                                                        <p>Your Rating <sup>*</sup></p>
-                                                        <div class="star-rating-v2">
-                                                            <span class="fa fa-star-o" data-rating="1"></span>
-                                                            <span class="fa fa-star-o" data-rating="2"></span>
-                                                            <span class="fa fa-star-o" data-rating="3"></span>
-                                                            <span class="fa fa-star-o" data-rating="4"></span>
-                                                            <span class="fa fa-star-o" data-rating="5"></span>
-                                                            <input type="hidden" name="whatever1" class="rating-value"
-                                                                value="2.56">
-                                                        </div>
+                                                <script>
+                                                    const url = '/pdf/1.pdf';
+
+                                                    let pdfDoc = null;
+
+                                                    pdfjsLib.getDocument(url).promise.then(function (pdf) {
+                                                        pdfDoc = pdf;
+                                                        for (let i = 1; i <= 2; i++) {
+                                                            renderPage(i);
+                                                        }
+                                                    });
+
+                                                    function renderPage(num) {
+                                                        pdfDoc.getPage(num).then(function (page) {
+                                                            const canvas = document.getElementById('pdf-page-' + num);
+                                                            const context = canvas.getContext('2d');
+                                                            const viewport = page.getViewport({ scale: 1 });
+
+                                                            canvas.height = viewport.height;
+                                                            canvas.width = viewport.width;
+
+                                                            const renderContext = {
+                                                                canvasContext: context,
+                                                                viewport: viewport
+                                                            };
+
+                                                            page.render(renderContext);
+                                                        });
+                                                    }
+                                                </script>
+                                                <a href="/pdf/1.pdf" class="btn btn-primary" download>Download PDF</a>
+                                        </div>
+                                        <div id="tab-content-2" class="tab-content">
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
+                                                efficitur
+                                                mattis nibh, non ornare neque. In bibendum consequat imperdiet. Duis
+                                                eros ex, vestibulum vel fermentum ut, gravida at turpis.
+                                                Etiam porta sem dolor, at finibus metus consequat a. Aliquam erat
+                                                volutpat. </p>
+                                        </div>
+                                        <div id="tab-content-3" class="tab-content">
+                                            <span class="sub-title">User Rating</span>
+                                            <h2 class="section-title">Readers Reviews
+                                            </h2>
+                                            <p class="lead-text">Sed nec fermentum leo. Vestibulum pulvinar, risus
+                                                quis
+                                                mollis posuere, lorem lectus pretium turpis, non elementum eros
+                                                metus ut
+                                                purus. Morbi hendrerit molestie augue luctus euismod. </p>
+                                            <span class="sub-title">Your rating</span>
+                                            <h2 class="section-title">Write Your Comment
+                                            </h2>
+                                            <div class="product-rating">
+                                                <div class="rating-box">
+                                                    <p>Your Rating <sup>*</sup></p>
+                                                    <div class="star-rating-v2">
+                                                        <span class="fa fa-star-o" data-rating="1"></span>
+                                                        <span class="fa fa-star-o" data-rating="2"></span>
+                                                        <span class="fa fa-star-o" data-rating="3"></span>
+                                                        <span class="fa fa-star-o" data-rating="4"></span>
+                                                        <span class="fa fa-star-o" data-rating="5"></span>
+                                                        <input type="hidden" name="whatever1" class="rating-value"
+                                                            value="2.56">
                                                     </div>
                                                 </div>
-                                                <form>
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <input type="text" class="form-control"
-                                                                    placeholder="Your Name">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <input type="email" class="form-control"
-                                                                    placeholder="Enter email">
-                                                            </div>
-                                                            <button type="submit"
-                                                                class="btn btn-secondary d-none d-md-block">Post
-                                                                Your
-                                                                Comment</button>
-                                                        </div>
-                                                        <div class="col-md-6 mb-5 mb-md-0">
-                                                            <div class="form-group">
-                                                                <textarea class="form-control" rows="5"
-                                                                    placeholder="Your Review"></textarea>
-                                                            </div>
-                                                            <button type="submit"
-                                                                class="btn btn-secondary d-md-none">Post
-                                                                Your
-                                                                Comment</button>
-                                                        </div>
-                                                    </div>
-                                                </form>
                                             </div>
+                                            <form>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control"
+                                                                placeholder="Your Name">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <input type="email" class="form-control"
+                                                                placeholder="Enter email">
+                                                        </div>
+                                                        <button type="submit"
+                                                            class="btn btn-secondary d-none d-md-block">Post
+                                                            Your
+                                                            Comment</button>
+                                                    </div>
+                                                    <div class="col-md-6 mb-5 mb-md-0">
+                                                        <div class="form-group">
+                                                            <textarea class="form-control" rows="5"
+                                                                placeholder="Your Review"></textarea>
+                                                        </div>
+                                                        <button type="submit" class="btn btn-secondary d-md-none">Post
+                                                            Your
+                                                            Comment</button>
+                                                    </div>
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -279,7 +310,8 @@
                     </div>
                 </div>
             </div>
-        </main>
+    </div>
+    </main>
     </div>
     </div>
     <section class="more-items-carousel pt-0"></section>

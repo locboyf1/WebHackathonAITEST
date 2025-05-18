@@ -30,7 +30,7 @@ namespace WebHackathon.ViewComponents
                     AuthorName = b.Author != null ? b.Author.Name : "Unknown",
                     CategoryName = b.Category != null ? b.Category.Title : "No Category",
                     Description = b.Description,
-                    Price = b.Price.ToString(),
+                    Score = b.Score.ToString(),
                     Image = b.Image != null ? b.Image : "/images/no-image.png"
                 })
                 .ToListAsync();
@@ -46,7 +46,7 @@ namespace WebHackathon.ViewComponents
         public string AuthorName { get; set; }
         public string CategoryName { get; set; }
         public string Description { get; set; }
-        public string? Price { get; set; }
+        public string? Score { get; set; }
         public string? Image { get; set; }
         
     }
