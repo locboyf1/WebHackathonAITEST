@@ -1,0 +1,205 @@
+﻿@model IEnumerable<TbBlog>
+@{
+    int category = ViewBag.Category;
+}
+<!-- Start: Page Banner -->
+<section class="inner-page-banner">
+    <div class="container">
+        <div class="banner-header">
+            <h2>Blog Grid View</h2>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb justify-content-center">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Blog Grid</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</section>
+<!-- End: Page Banner -->
+<!-- Start: Blog Section -->
+<div id="content" class="site-content">
+    <div id="primary" class="content-area">
+        <main id="main" class="site-main">
+            <div class="blog-main-list blog-grid">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="blog-header">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group mb-0">
+                                                    <div class="select">
+                                                        <select name="popularity" class="form-control select-hidden">
+                                                            <option>Sort by Popularity</option>
+                                                            <option>Popularity 01</option>
+                                                            <option>Popularity 02</option>
+                                                            <option>Popularity 03</option>
+                                                            <option>Popularity 04</option>
+                                                            <option>Popularity 05</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group mb-0">
+                                                    <div class="select">
+                                                        <select name="Publishing" class="form-control select-hidden">
+                                                            <option>Publishing Date</option>
+                                                            <option>Publishing Date 01</option>
+                                                            <option>Publishing Date 02</option>
+                                                            <option>Publishing Date 03</option>
+                                                            <option>Publishing Date 04</option>
+                                                            <option>Publishing Date 05</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 d-flex justify-content-end align-items-center">
+                                        <a href="blog-grid.html"><img src="images/icons/grid-icon.png" alt=""></a>
+                                        <a href="blog-list.html"><img src="images/icons/list-icon.png" alt=""></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            @foreach (var item in Model)
+                            {
+                                <div class="col-md-4">
+                                    <div class="single-blog-post-v3">
+                                        <div class="blog-thumb-v3">
+                                            <div class="post-time-date">
+                                                <ul>
+                                                    <li>@item.Date.Value.ToString("MM")</li>
+                                                    <li>@item.Date.Value.ToString("yyyy")</li>
+                                                </ul>
+                                            </div>
+                                            <a href="blog-detail.html">
+                                                <img src="@item.Image" cover width="100%"
+                                                     alt="">
+                                            </a>
+                                        </div>
+                                        <div class="blog-content-v3">
+                                            <ul>
+                                                <li><a href="#"><i class="fa fa-comment"></i> @item.TbComments.Count()</a></li>
+                                                <li><a href="#"><i class="fa fa-thumbs-up"></i> @item.LikeCount</a></li>
+                                                <li><a href="#"><i class="fa fa-eye"></i> @item.ViewCount</a></li>
+                                                <li>
+                                                    <div class="socialShare">
+                                                        <div class="socialBox pointer">
+                                                            <span><i class="fa fa-share-alt"></i> Share</span>
+                                                            <div class="socialGallery">
+                                                                <div class="socialToolBox">
+                                                                    <a class="facebook" href="#">
+                                                                        <i class="fa fa-facebook"></i>
+                                                                    </a>
+                                                                    <a class="google" href="#">
+                                                                        <i class="fa fa-google-plus"></i>
+                                                                    </a>
+                                                                    <a class="instagram" href="#">
+                                                                        <i class="fa fa-instagram"></i>
+                                                                    </a>
+                                                                    <a class="tumblr" href="#">
+                                                                        <i class="fa fa-tumblr"></i>
+                                                                    </a>
+                                                                    <a class="twitter" href="#">
+                                                                        <i class="fa fa-twitter"></i>
+                                                                    </a>
+                                                                    <a class="youtube" href="#">
+                                                                        <i class="fa fa-youtube"></i>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                            <h3>
+                                                <a href="blog-detail.html">
+                                                    @item.Title
+                                                </a>
+                                            </h3>
+                                            <p>
+                                                @item.Description
+                                            </p>
+                                            <a href="blog-detail.html" class="read-more">
+                                                <img src="/assets/images/link-arrow.png" alt="Read More">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <nav aria-label="Page Navigation">
+                        <ul class="pagination">
+                            @for (int i = 1; i <= ViewBag.page_num; i++)
+                            {
+                                <li class="page-item @(ViewBag.page == i ? "active" : "")">
+                                    <a class="page-link" asp-action="Index" asp-route-category="@category" asp-route-page="@i">@i</a>
+                                </li>
+                            }
+
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+<!-- End: Blog Section -->
+<!-- Start: Testimonial Section -->
+<section class="testimonial-main-v3">
+    <div class="container">
+        <div class="testimonial-social-main" style="background-image: none;">
+            <div class="row">
+                <div class="col-md-10 mx-auto text-center">
+                    <h6 class="sub-heading-v2">Newsletter</h6>
+                    <h2 class="heading-v2">Subscribe Our Newsletter</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-10 mx-auto">
+                    <div class="form-group newsletter-inner">
+                        <input class="form-control" placeholder="Enter your Email!" id="newsletter" name="newsletter" type="email">
+                        <input class="btn btn-primary" value="Subscribe" type="submit">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="social-icons-v3">
+            <ul>
+                <li>
+                    <a class="facebook" href="#" target="_blank">
+                        <span><i class="fa fa-facebook-f"></i> <small>Facebook</small></span>
+                    </a>
+                </li>
+                <li>
+                    <a class="twitter" href="#" target="_blank">
+                        <span><i class="fa fa-twitter"></i> <small>Twitter</small></span>
+                    </a>
+                </li>
+                <li>
+                    <a class="rss" href="#" target="_blank">
+                        <span><i class="fa fa-rss"></i> <small>Rss Feed</small></span>
+                    </a>
+                </li>
+                <li>
+                    <a class="linkedin" href="#" target="_blank">
+                        <span><i class="fa fa-linkedin"></i> <small>Linkedin</small></span>
+                    </a>
+                </li>
+                <li>
+                    <a class="youtube" href="#" target="_blank">
+                        <span><i class="fa fa-youtube"></i> <small>Youtube</small></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+<!-- End: Testimonial Section -->
