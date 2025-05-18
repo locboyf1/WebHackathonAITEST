@@ -22,7 +22,7 @@ namespace WebHackathon.ViewComponents
                 .Include(b => b.Author)
                 .Include(b => b.Category)
                 .OrderBy(b => b.BookId)
-                .Take(10)
+                .Take(8)
                 .Select(b => new BookInfoDto
                 {
                     Title = b.Title,

@@ -334,6 +334,12 @@
                                 <span class="menu-text">Sách</span>
                             </a>
                         </li>
+                        <li class="@(ViewBag.Active == "user" ? "current-page" : "")">
+                            <a asp-area="Admin" asp-controller="User" asp-action="Index">
+                                <i class="bi bi-book"></i>
+                                <span class="menu-text">User</span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
                 <!-- Sidebar menu ends -->

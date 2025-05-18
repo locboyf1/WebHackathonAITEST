@@ -22,9 +22,8 @@ public partial class TbBook
     public int? PublisherId { get; set; }
 
     public int? Price { get; set; }
-
+    public string? Image { get; set; }
     public virtual TbAuthor? Author { get; set; }
-
     public virtual TbCategory? Category { get; set; }
 
     public virtual TbPublisher? Publisher { get; set; }
