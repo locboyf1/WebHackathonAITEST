@@ -1,0 +1,67 @@
+﻿@model IEnumerable<WebHackathon.Models.TbTagBlog>
+@{
+    ViewData["Title"] = "Blog tag manager";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    ViewBag.Active = "blogs";
+    TbBlog blog = ViewBag.blog;
+}
+
+<!-- App body starts -->
+<div class="app-body">
+
+    <a class="mb-3 btn btn-info " href="/admin/blogs"> Back </a>
+
+    <!-- Row start -->
+    <div class="row gx-3">
+        <div class="col-xxl-12">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table align-middle table-hover m-0">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Rank</th>
+                                    <th scope="col">Tag</th>
+                                    <th scope="col">Action</th>
+
+                                </tr>
+                            </thead>
+                            @{
+                                int i = 1;
+                            }
+
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <form asp-action="Delete" method="post">
+                                       <input type="hidden" name="id" value="@item.TagBlogId" /> 
+                                    <tr>
+                                        <td>@(i++)</td>
+                                        <td>@item.Tag</td>
+                                        <td><button type="submit" class="btn btn-danger" >Xóa</button></td>
+                                    </tr>
+                                    
+                                    </form>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <form asp-action="Create" method="post">
+                        <div class="mb-3">
+                            <input type="hidden" name="idblog" value="@blog.BlogId" />
+                            <label for="tag" class="form-label">Tag</label>
+                            <input type="text" class="form-control" id="tag" name="tag" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Add</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- Row end -->
+
+</div>
+<!-- App body ends -->

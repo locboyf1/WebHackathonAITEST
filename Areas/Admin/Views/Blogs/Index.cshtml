@@ -46,7 +46,7 @@
                                         <th scope="row">
 
                                             <a class="btn btn-success" asp-action="Edit" asp-route-id="@item.BlogId">Edit</a>
-                                            <a class="btn btn-info" asp-action="Details" asp-route-id="@item.BlogId">Description</a>
+                                            <a class="btn btn-info" asp-action="Index" asp-controller="TagBlogs" asp-route-id="@item.BlogId">Tag list</a>
                                             <input type="hidden" name="id" value="@item.BlogId" />
                                             <button type="submit" class="btn btn-danger">Delete</button>
                                         </th>
