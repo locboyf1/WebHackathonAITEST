@@ -55,11 +55,37 @@
         <div class="header-login-btn">
             @if (!Function.IsLogin())
             {
-                <a href="/login" class="btn btn-light"> <i class="fa fa-user"></i> Login </a>
+                <a href="#" class="btn btn-light">
+                    <i class="fa fa-cart-plus"></i> Cart
+                </a>
+                <a href="/login" class="btn btn-light">
+                    <i class="fa fa-user"></i> Login
+                </a>
             }
             else
             {
-                <a href="cart.html" class="btn btn-light"> <i class="fa fa-cart-plus"></i> Cart </a>
+                <div class="dropdown d-inline-block">
+                    <a class="btn btn-light dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                        <i class="fa fa-user-circle"></i> Account
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li>
+                            <a class="dropdown-item" href="#">
+                                <i class="fa fa-user"></i> Profile
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#">
+                                <i class="fa fa-cart-plus"></i> Cart
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="/login/logout">
+                                <i class="ri-logout-box-fill"></i> Logout
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             }
         </div>
     </div>

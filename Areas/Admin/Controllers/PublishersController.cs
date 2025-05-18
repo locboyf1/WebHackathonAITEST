@@ -38,7 +38,7 @@ namespace WebHackathon.Areas.Admin.Controllers
                 return Redirect("/home");
             }
 
-            var publisher = await _context.TbPublishers.Skip((1 - 1)*pageSize).ToListAsync();
+            var publisher = await _context.TbPublishers.Skip((1 - 1) * pageSize).ToListAsync();
 
             ViewBag.page = page;
 
@@ -151,7 +151,7 @@ namespace WebHackathon.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var tbPublisher = await _context.TbPublishers.Include(i=>i.TbBooks).ThenInclude(i=>i.TbDownloadeds).FirstOrDefaultAsync(i=>i.PublisherId == id);
+            var tbPublisher = await _context.TbPublishers.Include(i => i.TbBooks).ThenInclude(i => i.TbDownloadeds).FirstOrDefaultAsync(i => i.PublisherId == id);
             if (tbPublisher != null)
             {
                 _context.TbPublishers.Remove(tbPublisher);

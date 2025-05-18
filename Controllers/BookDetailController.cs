@@ -14,6 +14,7 @@ namespace WebHackathon.Controllers
         public string Description { get; set; }
         public string Publisher { get; set; }
         public int? Price { get; set; }
+        public string? Image { get; set; }
     }
     public class BookDetailController : Controller
     {
@@ -37,7 +38,8 @@ namespace WebHackathon.Controllers
                     CategoryName = b.Category != null ? b.Category.Title : "No Category",
                     Description = b.Description,
                     Publisher = b.Publisher != null ? b.Publisher.Name : "Unknown Publisher",
-                    Price = b.Price ?? 0
+                    Price = b.Price ?? 0,
+                    Image = b.Image != null ? b.Image : "/images/no-image.png"
                 })
                 .FirstOrDefaultAsync();
 
