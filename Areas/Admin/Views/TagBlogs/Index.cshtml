@@ -2,7 +2,7 @@
 @{
     ViewData["Title"] = "Blog tag manager";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
-    ViewBag.Active = "blogs";
+    ViewBag.Active = "blog";
     TbBlog blog = ViewBag.blog;
 }
 
@@ -34,13 +34,13 @@
                                 @foreach (var item in Model)
                                 {
                                     <form asp-action="Delete" method="post">
-                                       <input type="hidden" name="id" value="@item.TagBlogId" /> 
+                                        <input type="hidden" name="id" value="@item.TagBlogId" />
                                     <tr>
                                         <td>@(i++)</td>
                                         <td>@item.Tag</td>
-                                        <td><button type="submit" class="btn btn-danger" >Xóa</button></td>
+                                        <td><button type="submit" class="btn btn-danger">Xóa</button></td>
                                     </tr>
-                                    
+
                                     </form>
                                 }
                             </tbody>

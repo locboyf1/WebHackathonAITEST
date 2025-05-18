@@ -1,4 +1,4 @@
-@model WebHackathon.Controllers.BookDetail
+﻿@model WebHackathon.Controllers.BookDetail
 
 @{
     ViewData["Title"] = "Book Details";
@@ -198,10 +198,15 @@
 
                                         <div class="tab-content-wrapper">
                                             <div id="tab-content-1" class="tab-content">
+<<<<<<< HEAD
                                                 <h3>Read PDF File</h3>
 
                                                 <iframe src="/pdf/1.pdf" width="100%" height="1000px"></iframe>
 
+=======
+                                                <p>@Model.Description</p>
+                                                <a class="sub-title" asp-controller="DocumentViewer" asp-action="ViewPdf" asp-route-id="@Model.BookId" asp-route-returnUrl="@Context.Request.Path">Xem thêm</a>
+>>>>>>> origin/GroupviewFile
                                             </div>
                                             <div id="tab-content-2" class="tab-content">
                                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec

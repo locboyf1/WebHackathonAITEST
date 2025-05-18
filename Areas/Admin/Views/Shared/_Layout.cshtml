@@ -305,39 +305,45 @@
                         <li class="@(ViewBag.Active == "authors" ? "current-page" : "")">
                             <a asp-area="Admin" asp-controller="Authors" asp-action="index">
                                 <i class="bi bi-person-badge"></i>
-                                <span class="menu-text">Tác giả</span>
+                                <span class="menu-text">Author</span>
                             </a>
                         </li>
                         <li class="@(ViewBag.Active == "publishers" ? "current-page" : "")">
                             <a asp-area="Admin" asp-controller="Publishers" asp-action="index">
                                 <i class="bi bi-journals"></i>
-                                <span class="menu-text">Nhà xuất bản</span>
+                                <span class="menu-text">Publisher</span>
                             </a>
                         </li>
                         <li class="treeview @(ViewBag.Active == "categories" ? "current-page" : "")">
                             <a href="#!">
                                 <i class="bi bi-collection"></i>
-                                <span class="menu-text">Danh mục</span>
+                                <span class="menu-text">Categories</span>
                             </a>
                             <ul class="treeview-menu">
                                 <li>
-                                    <a href="/admin/blogcategories">Danh mục bài viết</a>
+                                    <a href="/admin/blogcategories">Blog category</a>
                                 </li>
                                 <li>
-                                    <a href="/admin/categories">Danh mục sách</a>
+                                    <a href="/admin/categories">Book category</a>
                                 </li>
                             </ul>
                         </li>
                         <li class="@(ViewBag.Active == "books" ? "current-page" : "")">
                             <a asp-area="Admin" asp-controller="Books" asp-action="Index">
                                 <i class="bi bi-book"></i>
-                                <span class="menu-text">Sách</span>
+                                <span class="menu-text">Book</span>
                             </a>
                         </li>
                         <li class="@(ViewBag.Active == "user" ? "current-page" : "")">
                             <a asp-area="Admin" asp-controller="User" asp-action="Index">
                                 <i class="bi bi-book"></i>
                                 <span class="menu-text">User</span>
+                            </a>
+                        </li>
+                        <li class="@(ViewBag.Active == "blog" ? "current-page" : "")">
+                            <a asp-area="Admin" asp-controller="Blogs" asp-action="Index">
+                                <i class="bi bi-substack"></i>
+                                <span class="menu-text">Blog</span>
                             </a>
                         </li>
                     </ul>
