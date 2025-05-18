@@ -4,11 +4,14 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.IO;
 using WebHackathon.Models;
+using WebHackathon.Utilities;
 
 namespace WebHackathon.Controllers
 {
     public class DocumentViewerController : Controller
     {
+        private readonly DbHackathonContext _db;
+       
         private readonly IWebHostEnvironment _hostingEnvironment;
 
         //public DocumentViewerController(IWebHostEnvironment hostingEnvironment)
@@ -100,21 +103,29 @@ namespace WebHackathon.Controllers
           }*/
         private readonly IWebHostEnvironment _env;
 
-        public DocumentViewerController(IWebHostEnvironment env)
+        public DocumentViewerController(IWebHostEnvironment env, DbHackathonContext db)
         {
             _env = env;
+            _db = db;
         }
 
-        public IActionResult ViewPdf(string fileName)
+        public IActionResult ViewPdf(int? id)
         {
-            if (string.IsNullOrEmpty(fileName))
+            var fileName = (from b in _db.TbBooks
+                            where b.BookId == id
+                            select b).FirstOrDefault();
+            if (string.IsNullOrEmpty(fileName.BookPdf))
                 return BadRequest("Tên file không được rỗng.");
 
-            string filePath = Path.Combine(_env.WebRootPath, "Documents", fileName);
+            string filePath = Path.Combine(_env.WebRootPath, "Documents", fileName.BookPdf);
             if (!System.IO.File.Exists(filePath))
-                return NotFound($"Không tìm thấy file: {fileName}");
+                return NotFound($"Không tìm thấy file: {fileName.BookPdf}");
 
-            ViewBag.FileName = fileName;
+            
+
+            bool hasBorrowed = _db.TbBorrows.Any(b => b.BookId == id && b.UserId == Function._userid);
+            ViewBag.FileName = fileName.BookPdf;
+            ViewBag.PreviewOnly = !hasBorrowed;
             return View("Viewer");
         }
 
