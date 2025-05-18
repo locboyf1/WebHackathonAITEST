@@ -21,7 +21,7 @@ public partial class TbBook
 
     public int? PublisherId { get; set; }
 
-    public int? Price { get; set; }
+    public int? Score { get; set; }
 
     public string? Image { get; set; }
 

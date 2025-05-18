@@ -6,11 +6,11 @@ using MySql.EntityFrameworkCore.Extensions;
 var builder = WebApplication.CreateBuilder(args);
 
 
-builder.Services.AddDbContext<DbHackathonContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+//builder.Services.AddDbContext<DbHackathonContext>(options =>
+//    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));*@
 
-@*builder.Services.AddDbContext<DbHackathonContext>(options =>
-    options.UseMySQL(builder.Configuration.GetConnectionString("DefaultConnection")));*@
+builder.Services.AddDbContext<DbHackathonContext>(options =>
+    options.UseMySQL(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

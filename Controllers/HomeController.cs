@@ -55,6 +55,11 @@ public class HomeController : Controller
         return View("Index");
     }
 
+    public IActionResult PdfPreview()
+    {
+        return View();
+    }
+
     public IActionResult Privacy()
     {
         return View();

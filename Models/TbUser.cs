@@ -21,7 +21,9 @@ public partial class TbUser
 
     public bool IsLock { get; set; }
 
+    public int? Score { get; set; }
     public virtual TbRole? Role { get; set; }
+
 
     public virtual ICollection<TbBlog> TbBlogs { get; set; } = new List<TbBlog>();
 
