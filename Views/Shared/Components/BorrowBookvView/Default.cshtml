@@ -1,0 +1,32 @@
+﻿@model List<WebHackathon.ViewModels.BorrowedBookViewModel>
+
+@foreach (var bb in Model)
+{
+    <div class="borrowed-book">
+        <div class="row">
+            <div class="col-md-2 col-sm-3 mb-3 mb-sm-0">
+                <img src="/assets/images/Bookimage/@bb.Image" alt="Book Cover" class="img-fluid">
+            </div>
+            <div class="col-md-10 col-sm-9">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                        <h5>@bb.BookTitle</h5>
+                        <p class="text-muted mb-1">@bb.AuthorName</p>
+                    </div>
+                    <span class="badge badge-due-soon">Truy cập @bb.BorrowDate.ToString("dd/MM/yyyy")</span>
+                </div>
+                <p class="small mb-2">@bb.Desc</p>
+                <div class="mb-2">
+                    <small class="text-muted">Due: May 25, 2025</small>
+                    <div class="progress mt-1">
+                        <div class="progress-bar bg-success" style="width: 70%"></div>
+                    </div>
+                </div>
+                <div>
+                    <a asp-controller="DocumentViewer" asp-action="ViewPdf" asp-route-id="@bb.BookID" class="btn btn-sm btn-outline-primary mr-2">Xem tài liệu</a>
+                    <button class="btn btn-sm btn-outline-secondary">Mark as Returned</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
