@@ -109,7 +109,7 @@ namespace WebHackathon.Controllers
             _db = db;
         }
 
-        public IActionResult ViewPdf(int? id)
+        public IActionResult ViewPdf(int? id, string returnUrl)
         {
             var fileName = (from b in _db.TbBooks
                             where b.BookId == id
@@ -126,6 +126,7 @@ namespace WebHackathon.Controllers
             bool hasBorrowed = _db.TbBorrows.Any(b => b.BookId == id && b.UserId == Function._userid);
             ViewBag.FileName = fileName.BookPdf;
             ViewBag.PreviewOnly = !hasBorrowed;
+            ViewBag.ReturnUrl = string.IsNullOrEmpty(returnUrl) ? "/" : returnUrl;
             return View("Viewer");
         }
 
