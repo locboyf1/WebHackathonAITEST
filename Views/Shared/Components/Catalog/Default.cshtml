@@ -1,0 +1,11 @@
+@using WebHackathon.Models;
+@using WebHackathon.Utilities;
+@model IEnumerable<WebHackathon.Models.TbBlogCategory>
+
+<select name="catalog" id="catalog" class="form-control">
+    <option>Search the Catalog</option>
+    @foreach (var catalog in Model)
+    {
+        <option value="@catalog.BlogCategoryId">@catalog.Title</option>
+    }
+</select>

@@ -22,6 +22,7 @@ namespace WebHackathon.Areas.Admin.Controllers
         // GET: Admin/Books
         public async Task<IActionResult> Index()
         {
+            ViewBag.Active = "books";
             var dbHackathonContext = _context.TbBooks.Include(t => t.Author).Include(t => t.Category).Include(t => t.Publisher);
             return View(await dbHackathonContext.ToListAsync());
         }
@@ -29,6 +30,7 @@ namespace WebHackathon.Areas.Admin.Controllers
         // GET: Admin/Books/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            ViewBag.Active = "books";
             if (id == null)
             {
                 return NotFound();
@@ -50,6 +52,7 @@ namespace WebHackathon.Areas.Admin.Controllers
         // GET: Admin/Books/Create
         public IActionResult Create()
         {
+            ViewBag.Active = "books";
             ViewData["AuthorId"] = new SelectList(_context.TbAuthors, "AuthorId", "AuthorId");
             ViewData["CategoryId"] = new SelectList(_context.TbCategories, "CategoryId", "CategoryId");
             ViewData["PublisherId"] = new SelectList(_context.TbPublishers, "PublisherId", "PublisherId");
@@ -63,6 +66,7 @@ namespace WebHackathon.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("BookId,Title,Description,BookPdf,Star,CategoryId,AuthorId,PublisherId,Price")] TbBook tbBook)
         {
+            ViewBag.Active = "books";
             if (ModelState.IsValid)
             {
                 _context.Add(tbBook);
@@ -78,6 +82,7 @@ namespace WebHackathon.Areas.Admin.Controllers
         // GET: Admin/Books/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            ViewBag.Active = "books";
             if (id == null)
             {
                 return NotFound();
@@ -101,6 +106,7 @@ namespace WebHackathon.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("BookId,Title,Description,BookPdf,Star,CategoryId,AuthorId,PublisherId,Price")] TbBook tbBook)
         {
+            ViewBag.Active = "books";
             if (id != tbBook.BookId)
             {
                 return NotFound();
@@ -135,6 +141,7 @@ namespace WebHackathon.Areas.Admin.Controllers
         // GET: Admin/Books/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            ViewBag.Active = "books";
             if (id == null)
             {
                 return NotFound();
@@ -158,6 +165,7 @@ namespace WebHackathon.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            ViewBag.Active = "books";
             var tbBook = await _context.TbBooks.FindAsync(id);
             if (tbBook != null)
             {

@@ -1,0 +1,489 @@
+@model WebHackathon.Controllers.BookDetail
+
+@{
+    ViewData["Title"] = "Book Details";
+    ViewBag.Title = "Book Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<body>
+    <section class="inner-page-banner"></section>
+    <div class="container">
+        <div class="banner-header">
+            <h2>Books & Media Detail V2</h2>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb justify-content-center">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Books & Media Detail V2</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    </section>
+    <div id="content" class="site-content"></div>
+    <div id="primary" class="content-area">
+        <main id="main" class="site-main">
+            <div class="books-media-list">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="event-search-filter">
+                                <input type="text" placeholder="Search by Keyword" />
+                                <select name="category" id="event-category" class="form-control">
+                                    <option>Select Any Category</option>
+                                    <option>Category</option>
+                                    <option>Category</option>
+                                    <option>Category</option>
+                                    <option>Category</option>
+                                    <option>Category</option>
+                                </select>
+                                <select name="category" id="event-catelog" class="form-control">
+                                    <option>Select Any Catelog</option>
+                                    <option>Catelog</option>
+                                    <option>Catelog</option>
+                                    <option>Catelog</option>
+                                    <option>Catelog</option>
+                                    <option>Catelog</option>
+                                </select>
+                                <button type="submit" class="btn btn-secondary"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="books-media-detail-v2">
+                                <div class="single-book-media">
+                                    <div class="row no-gutters">
+                                        <div class="col-md-12 col-lg-9">
+                                            <div class="book-thumb">
+                                                <span class="instock">Available</span>
+                                                <img src="images/books-media/detail-page/book-media-detail-v2.jpg"
+                                                    alt="">
+                                            </div>
+                                            <div class="book-detail">
+                                                <a class="category-tags bg-yellow">Magazine</a>
+                                                {
+                                                <h3 class="book-media-title">@Model.Title</h3>
+                                                }
+                                                <div class="rating-box">
+                                                    <div class="rating">
+                                                        <input type="radio" id="star5" name="rating" value="5" /><label
+                                                            class="full" for="star5" title="Awesome - 5 stars"></label>
+                                                        <input type="radio" id="star4half" name="rating"
+                                                            value="4 and a half" /><label class="half" for="star4half"
+                                                            title="Pretty good - 4.5 stars"></label>
+                                                        <input type="radio" id="star4" name="rating" value="4" /><label
+                                                            class="full" for="star4"
+                                                            title="Pretty good - 4 stars"></label>
+                                                        <input type="radio" id="star3half" name="rating"
+                                                            value="3 and a half" /><label class="half" for="star3half"
+                                                            title="Meh - 3.5 stars"></label>
+                                                        <input type="radio" id="star3" name="rating" value="3" /><label
+                                                            class="full" for="star3" title="Meh - 3 stars"></label>
+                                                        <input type="radio" id="star2half" name="rating"
+                                                            value="2 and a half" /><label class="half" for="star2half"
+                                                            title="Kinda bad - 2.5 stars"></label>
+                                                        <input type="radio" id="star2" name="rating" value="2" /><label
+                                                            class="full" for="star2"
+                                                            title="Kinda bad - 2 stars"></label>
+                                                        <input type="radio" id="star1half" name="rating"
+                                                            value="1 and a half" /><label class="half" for="star1half"
+                                                            title="Meh - 1.5 stars"></label>
+                                                        <input type="radio" id="star1" name="rating" value="1" /><label
+                                                            class="full" for="star1"
+                                                            title="Sucks big time - 1 star"></label>
+                                                        <input type="radio" id="starhalf" name="rating"
+                                                            value="half" /><label class="half" for="starhalf"
+                                                            title="Sucks big time - 0.5 stars"></label>
+                                                    </div>
+                                                    <p>37 Reviews</p>
+                                                </div>
+                                                <div class="item-social-share">
+                                                    <ul>
+                                                        <li class="facebook"><a href="#"><i
+                                                                    class="fa fa-facebook-f"></i></a>
+                                                        </li>
+                                                        <li class="twitter"><a href="#"><i
+                                                                    class="fa fa-twitter"></i></a>
+                                                        </li>
+                                                        <li class="pintrest"><a href="#"><i
+                                                                    class="fa fa-pinterest-square"></i></a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="item-info">
+                                                    <ul>
+
+                                                        <li>
+                                                            <strong>ID:</strong> @Model.BookId
+                                                        </li>
+                                                        <li>
+                                                            <strong>Author:</strong> @Model.AuthorName
+                                                        </li>
+
+                                                    </ul>
+                                                </div>
+                                                <div class="single-item-info">
+                                                    <ul>
+
+                                                        <li>
+                                                            <strong>Publisher:</strong> @Model.Publisher
+                                                        </li>
+                                                        <li>
+                                                            <strong>Category:</strong> @Model.CategoryName
+                                                        </li>
+
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 col-lg-3 d-flex align-items-center">
+                                            <div class="item-payment-info">
+                                                
+                                                    <span class="price-tag">@Model.Price<s>200.000</s><i>30-Day Money-Back
+                                                            Guarantee</i></span>
+                                                
+                                                <p><img src="images/icons/shipping-icon.png" alt=""> Free shipping
+                                                    worldwide
+                                                </p>
+                                                <p><img src="images/icons/return-icon.png" alt=""> 60-Day Returns
+                                                </p>
+                                                <ul>
+                                                    <li><a href="#"><img src="images/icons/master-icon.png" alt=""></a>
+                                                    </li>
+                                                    <li><a href="#"><img src="images/icons/visa-icon.png" alt=""></a>
+                                                    </li>
+                                                    <li><a href="#"><img src="images/icons/american-icon.png"
+                                                                alt=""></a>
+                                                    </li>
+                                                    <li><a href="#"><img src="images/icons/discover-icon.png"
+                                                                alt=""></a>
+                                                    </li>
+                                                    <li><a href="#"><img src="images/icons/paypal-small-icon.png"
+                                                                alt=""></a></li>
+                                                </ul>
+                                                <div class="card-links">
+                                                    <div class="quantity">
+                                                        <div class="quantity-control" data-quantity="">
+                                                            <button class="quantity-btn" data-quantity-minus=""><svg
+                                                                    viewBox="0 0 409.6 409.6">
+                                                                    <g>
+                                                                        <g>
+                                                                            <path
+                                                                                d="M392.533,187.733H17.067C7.641,187.733,0,195.374,0,204.8s7.641,17.067,17.067,17.067h375.467 c9.426,0,17.067-7.641,17.067-17.067S401.959,187.733,392.533,187.733z" />
+                                                                        </g>
+                                                                    </g>
+                                                                </svg></button><input type="number"
+                                                                class="quantity-input" data-quantity-target="" value="1"
+                                                                step="1" min="1" max="500" name="quantity">
+                                                            <button class="quantity-btn" data-quantity-plus=""><svg
+                                                                    viewBox="0 0 426.66667 426.66667">
+                                                                    <path
+                                                                        d="m405.332031 192h-170.664062v-170.667969c0-11.773437-9.558594-21.332031-21.335938-21.332031-11.773437 0-21.332031 9.558594-21.332031 21.332031v170.667969h-170.667969c-11.773437 0-21.332031 9.558594-21.332031 21.332031 0 11.777344 9.558594 21.335938 21.332031 21.335938h170.667969v170.664062c0 11.777344 9.558594 21.335938 21.332031 21.335938 11.777344 0 21.335938-9.558594 21.335938-21.335938v-170.664062h170.664062c11.777344 0 21.335938-9.558594 21.335938-21.335938 0-11.773437-9.558594-21.332031-21.335938-21.332031zm0 0" />
+                                                                </svg>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <a href="#" class="btn btn-primary"><img
+                                                            src="images/icons/orange-cart-icon.png" alt="">
+                                                        Add
+                                                        To Cart</a>
+                                                    <a href="#" class="wishlist"><i class="fa fa-heart"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="product-overview">
+                                    <div class="tabs">
+                                        <input type="radio" name="tab" id="tab1" checked="checked">
+                                        <label for="tab1">Overview</label>
+                                        <input type="radio" name="tab" id="tab2">
+                                        <label for="tab2">Table Of Contents</label>
+                                        <input type="radio" name="tab" id="tab3">
+                                        <label for="tab4">Reviews</label>
+
+                                        <div class="tab-content-wrapper">
+                                            <div id="tab-content-1" class="tab-content">
+                                                <p>@Model.Description</p>
+                                            </div>
+                                            <div id="tab-content-2" class="tab-content">
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
+                                                    efficitur
+                                                    mattis nibh, non ornare neque. In bibendum consequat imperdiet. Duis
+                                                    eros ex, vestibulum vel fermentum ut, gravida at turpis.
+                                                    Etiam porta sem dolor, at finibus metus consequat a. Aliquam erat
+                                                    volutpat. </p>
+                                        </div>
+                                        <div id="tab-content-3" class="tab-content">
+                                            <span class="sub-title">User Rating</span>
+                                            <h2 class="section-title">Readers Reviews
+                                            </h2>
+                                            <p class="lead-text">Sed nec fermentum leo. Vestibulum pulvinar, risus quis
+                                                mollis posuere, lorem lectus pretium turpis, non elementum eros metus ut
+                                                purus. Morbi hendrerit molestie augue luctus euismod. </p>
+                                            <span class="sub-title">Your rating</span>
+                                            <h2 class="section-title">Write Your Comment
+                                            </h2>
+                                            <div class="product-rating">
+                                                <div class="rating-box">
+                                                    <p>Your Rating <sup>*</sup></p>
+                                                    <div class="star-rating-v2">
+                                                        <span class="fa fa-star-o" data-rating="1"></span>
+                                                        <span class="fa fa-star-o" data-rating="2"></span>
+                                                        <span class="fa fa-star-o" data-rating="3"></span>
+                                                        <span class="fa fa-star-o" data-rating="4"></span>
+                                                        <span class="fa fa-star-o" data-rating="5"></span>
+                                                        <input type="hidden" name="whatever1" class="rating-value"
+                                                            value="2.56">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <form>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control"
+                                                                placeholder="Your Name">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <input type="email" class="form-control"
+                                                                placeholder="Enter email">
+                                                        </div>
+                                                        <button type="submit"
+                                                            class="btn btn-secondary d-none d-md-block">Post
+                                                            Your
+                                                            Comment</button>
+                                                    </div>
+                                                    <div class="col-md-6 mb-5 mb-md-0">
+                                                        <div class="form-group">
+                                                            <textarea class="form-control" rows="5"
+                                                                placeholder="Your Review"></textarea>
+                                                        </div>
+                                                        <button type="submit" class="btn btn-secondary d-md-none">Post
+                                                            Your
+                                                            Comment</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+    </main>
+    </div>
+    </div>
+    <section class="more-items-carousel pt-0"></section>
+    <div class="container-fluid">
+        <div class="title-content">
+            <span class="sub-title ">Related Products</span>
+            <h2 class="section-title ">Your May Also Like</h2>
+        </div>
+        <div class="owl-carousel-full books-media-listing">
+            <div class="single-book-media item">
+                <div class="book-thumb">
+                    <span class="price-tag">Free</span>
+                    <img src="images/books-media/gird-view/book-media-1.jpg" alt="">
+                </div>
+                <div class="book-detail">
+                    <div class="mb-2">
+                        <div class="star-rating-v2">
+                            <span class="fa fa-star-o" data-rating="1"></span>
+                            <span class="fa fa-star-o" data-rating="2"></span>
+                            <span class="fa fa-star-o" data-rating="3"></span>
+                            <span class="fa fa-star-o" data-rating="4"></span>
+                            <span class="fa fa-star-o" data-rating="5"></span>
+                            <input type="hidden" name="whatever1" class="rating-value" value="2.56">
+                        </div>
+                        <a class="category-tags bg-light-blue">Book</a>
+                    </div>
+                    <h3 class="book-media-title"><a href="#">The Possible World</a></h3>
+                    <p><strong>Author:</strong> F. Scott Fitzgerald</p>
+                    <p><strong>ISBN:</strong> 9781581573268</p>
+                </div>
+            </div>
+            <div class="single-book-media item">
+                <div class="book-thumb">
+                    <span class="price-tag">$39.00</span>
+                    <img src="images/books-media/gird-view/book-media-2.jpg" alt="">
+                </div>
+                <div class="book-detail">
+                    <div class="mb-2">
+                        <div class="star-rating-v2">
+                            <span class="fa fa-star-o" data-rating="1"></span>
+                            <span class="fa fa-star-o" data-rating="2"></span>
+                            <span class="fa fa-star-o" data-rating="3"></span>
+                            <span class="fa fa-star-o" data-rating="4"></span>
+                            <span class="fa fa-star-o" data-rating="5"></span>
+                            <input type="hidden" name="whatever1" class="rating-value" value="2.56">
+                        </div>
+                        <a class="category-tags bg-purple">Audio</a>
+                    </div>
+                    <h3 class="book-media-title"><a href="#">Out Of The Box</a></h3>
+                    <p><strong>Author:</strong> F. Scott Fitzgerald</p>
+                    <p><strong>ISBN:</strong> 9781581573268</p>
+                </div>
+            </div>
+            <div class="single-book-media item">
+                <div class="book-thumb">
+                    <span class="price-tag">$41.70</span>
+                    <img src="images/books-media/gird-view/book-media-3.jpg" alt="">
+                </div>
+                <div class="book-detail">
+                    <div class="mb-2">
+                        <div class="star-rating-v2">
+                            <span class="fa fa-star-o" data-rating="1"></span>
+                            <span class="fa fa-star-o" data-rating="2"></span>
+                            <span class="fa fa-star-o" data-rating="3"></span>
+                            <span class="fa fa-star-o" data-rating="4"></span>
+                            <span class="fa fa-star-o" data-rating="5"></span>
+                            <input type="hidden" name="whatever1" class="rating-value" value="2.56">
+                        </div>
+                        <a class="category-tags bg-pink">Video</a>
+                    </div>
+                    <h3 class="book-media-title"><a href="#">How To Help Someone</a></h3>
+                    <p><strong>Author:</strong> F. Scott Fitzgerald</p>
+                    <p><strong>ISBN:</strong> 9781581573268</p>
+                </div>
+            </div>
+            <div class="single-book-media item">
+                <div class="book-thumb">
+                    <span class="price-tag">$57.00</span>
+                    <img src="images/books-media/gird-view/book-media-4.jpg" alt="">
+                </div>
+                <div class="book-detail">
+                    <div class="mb-2">
+                        <div class="star-rating-v2">
+                            <span class="fa fa-star-o" data-rating="1"></span>
+                            <span class="fa fa-star-o" data-rating="2"></span>
+                            <span class="fa fa-star-o" data-rating="3"></span>
+                            <span class="fa fa-star-o" data-rating="4"></span>
+                            <span class="fa fa-star-o" data-rating="5"></span>
+                            <input type="hidden" name="whatever1" class="rating-value" value="2.56">
+                        </div>
+                        <a class="category-tags bg-orange">Eaudio</a>
+                    </div>
+                    <h3 class="book-media-title"><a href="#">Swept From The Sea</a></h3>
+                    <p><strong>Author:</strong> F. Scott Fitzgerald</p>
+                    <p><strong>ISBN:</strong> 9781581573268</p>
+                </div>
+            </div>
+            <div class="single-book-media item">
+                <div class="book-thumb">
+                    <span class="price-tag">$75.90</span>
+                    <img src="images/books-media/gird-view/book-media-5.jpg" alt="">
+                </div>
+                <div class="book-detail">
+                    <div class="mb-2">
+                        <div class="star-rating-v2">
+                            <span class="fa fa-star-o" data-rating="1"></span>
+                            <span class="fa fa-star-o" data-rating="2"></span>
+                            <span class="fa fa-star-o" data-rating="3"></span>
+                            <span class="fa fa-star-o" data-rating="4"></span>
+                            <span class="fa fa-star-o" data-rating="5"></span>
+                            <input type="hidden" name="whatever1" class="rating-value" value="2.56">
+                        </div>
+                        <a class="category-tags bg-orange">EAudio</a>
+                    </div>
+                    <h3 class="book-media-title"><a href="#">Freedom Is Space</a></h3>
+                    <p><strong>Author:</strong> F. Scott Fitzgerald</p>
+                    <p><strong>ISBN:</strong> 9781581573268</p>
+                </div>
+            </div>
+            <div class="single-book-media item">
+                <div class="book-thumb">
+                    <span class="price-tag">Free</span>
+                    <img src="images/books-media/gird-view/book-media-6.jpg" alt="">
+                </div>
+                <div class="book-detail">
+                    <div class="mb-2">
+                        <div class="star-rating-v2">
+                            <span class="fa fa-star-o" data-rating="1"></span>
+                            <span class="fa fa-star-o" data-rating="2"></span>
+                            <span class="fa fa-star-o" data-rating="3"></span>
+                            <span class="fa fa-star-o" data-rating="4"></span>
+                            <span class="fa fa-star-o" data-rating="5"></span>
+                            <input type="hidden" name="whatever1" class="rating-value" value="2.56">
+                        </div>
+                        <a class="category-tags bg-pink">Video</a>
+                    </div>
+                    <h3 class="book-media-title"><a href="#">The Winter Folly</a></h3>
+                    <p><strong>Author:</strong> F. Scott Fitzgerald</p>
+                    <p><strong>ISBN:</strong> 9781581573268</p>
+                </div>
+            </div>
+            <div class="single-book-media item">
+                <div class="book-thumb">
+                    <span class="price-tag">$45.50</span>
+                    <img src="images/books-media/gird-view/book-media-7.jpg" alt="">
+                </div>
+                <div class="book-detail">
+                    <div class="mb-2">
+                        <div class="star-rating-v2">
+                            <span class="fa fa-star-o" data-rating="1"></span>
+                            <span class="fa fa-star-o" data-rating="2"></span>
+                            <span class="fa fa-star-o" data-rating="3"></span>
+                            <span class="fa fa-star-o" data-rating="4"></span>
+                            <span class="fa fa-star-o" data-rating="5"></span>
+                            <input type="hidden" name="whatever1" class="rating-value" value="2.56">
+                        </div>
+                        <a class="category-tags bg-yellow">Magazine</a>
+                    </div>
+                    <h3 class="book-media-title"><a href="#">The Cerulean</a></h3>
+                    <p><strong>Author:</strong> F. Scott Fitzgerald</p>
+                    <p><strong>ISBN:</strong> 9781581573268</p>
+                </div>
+            </div>
+            <div class="single-book-media item">
+                <div class="book-thumb">
+                    <span class="price-tag">Free</span>
+                    <img src="images/books-media/gird-view/book-media-8.jpg" alt="">
+                </div>
+                <div class="book-detail">
+                    <div class="mb-2">
+                        <div class="star-rating-v2">
+                            <span class="fa fa-star-o" data-rating="1"></span>
+                            <span class="fa fa-star-o" data-rating="2"></span>
+                            <span class="fa fa-star-o" data-rating="3"></span>
+                            <span class="fa fa-star-o" data-rating="4"></span>
+                            <span class="fa fa-star-o" data-rating="5"></span>
+                            <input type="hidden" name="whatever1" class="rating-value" value="2.56">
+                        </div>
+                        <a class="category-tags bg-light-blue">Book</a>
+                    </div>
+                    <h3 class="book-media-title"><a href="#">Red Queen</a></h3>
+                    <p><strong>Author:</strong> F. Scott Fitzgerald</p>
+                    <p><strong>ISBN:</strong> 9781581573268</p>
+                </div>
+            </div>
+            <div class="single-book-media item">
+                <div class="book-thumb">
+                    <span class="price-tag">$29.10</span>
+                    <img src="images/books-media/gird-view/book-media-9.jpg" alt="">
+                </div>
+                <div class="book-detail">
+                    <div class="mb-2">
+                        <div class="star-rating-v2">
+                            <span class="fa fa-star-o" data-rating="1"></span>
+                            <span class="fa fa-star-o" data-rating="2"></span>
+                            <span class="fa fa-star-o" data-rating="3"></span>
+                            <span class="fa fa-star-o" data-rating="4"></span>
+                            <span class="fa fa-star-o" data-rating="5"></span>
+                            <input type="hidden" name="whatever1" class="rating-value" value="2.56">
+                        </div>
+                        <a class="category-tags bg-light-blue">Book</a>
+                    </div>
+                    <h3 class="book-media-title"><a href="#">A Boy In Winter</a></h3>
+                    <p><strong>Author:</strong> F. Scott Fitzgerald</p>
+                    <p><strong>ISBN:</strong> 9781581573268</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    </section>
+</body>
