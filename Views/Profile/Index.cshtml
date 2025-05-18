@@ -159,6 +159,10 @@
         background-color: #007bff;
         transform: translateY(-3px);
         }
+
+        .container {
+            margin-bottom: 200px;
+        }
     </style>
 }
 
@@ -362,9 +366,9 @@
                 </table>
             </div>
             <div class="text-center mt-3">
-                <a href="#" class="btn btn-outline-primary">View Full History</a>
+                <a asp-controller="Profile" asp-action="Details" asp-route-id="@Function._userid" class="btn btn-outline-primary">Chỉnh sửa thông tin</a>
             </div>
         </div>
     </div>
 </div>
-<footer></footer>
+<footer></footer>   
